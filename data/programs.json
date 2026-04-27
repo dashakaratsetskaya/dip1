@@ -1,28 +1,127 @@
-{
-    "programs": [
-    {
-        "id": "rob1",
-        "directionId": "robotics",
-        "name": "Робототехника LEGO WEDO",
-        "description": "Конструирование и программирование LEGO Mindstorms"
-    },
-    {
-        "id": "rob2",
-        "directionId": "robotics",
-        "name": "Роботехника EV3",
-        "description": "Программирование роботов EV3"
-    },
-    {
-        "id": "it1",
-        "directionId": "it",
-        "name": "Компьютерная грамотность",
-        "description": "Основы работы с ПК, файлы, интернет"
-    },
-    {
-        "id": "it2",
-        "directionId": "it",
-        "name": "Юный программист",
-        "description": "Python для начинающих"
-    }
-    ]
-}
+const programs = [
+  // Робототехника
+  {
+    id: 'rob1',
+    directionId: 'robotics',
+    name: 'Робототехника LEGO WEDO',
+    description: 'Конструирование и программирование LEGO Mindstorms'
+  },
+  {
+    id: 'rob2',
+    directionId: 'robotics',
+    name: 'Роботехника EV3',
+    description: ''
+  },
+  {
+    id: 'rob3',
+    directionId: 'robotics',
+    name: 'ARUINO 4U',
+    description: ''
+  },
+    
+  // IT — программирование
+  {
+    id: 'it1',
+    directionId: 'it',
+    name: 'Компьютерная грамотность',
+    description: ''
+  },
+  {
+    id: 'it2',
+    directionId: 'it',
+    name: 'Юный программист',
+    description: ''
+  },
+  {
+    id: 'it3',
+    directionId: 'it',
+    name: 'Pixel',
+    description: 'Python для начинающих'
+  },
+  {
+    id: 'it4',
+    directionId: 'it',
+    name: 'Программировнаие на языке Pascal',
+    description: ''
+  },
+  {
+    id: 'it5',
+    directionId: 'it',
+    name: 'App Inventor',
+    description: 'Разработка мобильных проложений'
+  },
+  {
+    id: 'it6',
+    directionId: 'it',
+    name: 'Основы алгоритмизации',
+    description: ''
+  },
+  {
+    id: 'it7',
+    directionId: 'it',
+    name: 'Спортивный программист',
+    description: 'Подготовка учащихся к олимпиаде по информатике'
+  },
+  {
+    id: 'it8',
+    directionId: 'it',
+    name: 'Web Dev',
+    description: ''
+  },
+  {
+    id: 'it9',
+    directionId: 'it',
+    name: 'Python',
+    description: ''
+  },
+  {
+    id: 'it10',
+    directionId: 'it',
+    name: 'C++',
+    description: ''
+  },
+  {
+    id: 'it11',
+    directionId: 'it',
+    name: 'C#',
+    description: ''
+  },
+  {
+    id: 'it12',
+    directionId: 'it',
+    name: 'Java',
+    description: ''
+  },
+  {
+    id: 'it13',
+    directionId: 'it',
+    name: 'Нейросети',
+    description: 'После курса Python'
+  },
+  {
+    id: 'it14',
+    directionId: 'it',
+    name: 'Компьютерное зрение',
+    description: 'После курса Python'
+  },
+  {
+    id: 'it15',
+    directionId: 'it',
+    name: '.NEXT',
+    description: ''
+  },
+  {
+    id: 'it16',
+    directionId: 'it',
+    name: 'Системное администрирование',
+    description: ''
+  },
+    
+  // Электроника
+  {
+    id: 'el1',
+    directionId: 'electronics',
+    name: 'Цифровая схемотехника',
+    description: 'Логические элементы и микросхемы'
+  }
+];
