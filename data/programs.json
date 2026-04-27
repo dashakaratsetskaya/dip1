@@ -1,127 +1,124 @@
-const programs = [
-  // Робототехника
+{
+"programs" = [
   {
-    id: 'rob1',
-    directionId: 'robotics',
-    name: 'Робототехника LEGO WEDO',
-    description: 'Конструирование и программирование LEGO Mindstorms'
+    "id": "rob1",
+    "directionId": "robotics",
+    "name": "Робототехника LEGO WEDO",
+    "description": "Конструирование и программирование LEGO Mindstorms"
   },
   {
-    id: 'rob2',
-    directionId: 'robotics',
-    name: 'Роботехника EV3',
-    description: ''
+    "id": "rob2",
+    "directionId": "robotics",
+    "name": "Роботехника EV3",
+    "description": ""
   },
   {
-    id: 'rob3',
-    directionId: 'robotics',
-    name: 'ARUINO 4U',
-    description: ''
-  },
-    
-  // IT — программирование
-  {
-    id: 'it1',
-    directionId: 'it',
-    name: 'Компьютерная грамотность',
-    description: ''
+    "id": "rob3",
+    "directionId": "robotics",
+    "name": "ARUINO 4U",
+    "description": ""
   },
   {
-    id: 'it2',
-    directionId: 'it',
-    name: 'Юный программист',
-    description: ''
+    "id": "it1",
+    "directionId": "it",
+    "name": "Компьютерная грамотность",
+    "description": ""
   },
   {
-    id: 'it3',
-    directionId: 'it',
-    name: 'Pixel',
-    description: 'Python для начинающих'
+    "id": "it2",
+    "directionId": "it",
+    "name": "Юный программист",
+    "description": ""
   },
   {
-    id: 'it4',
-    directionId: 'it',
-    name: 'Программировнаие на языке Pascal',
-    description: ''
+    "id": "it3",
+    "directionId": "it",
+    "name": "Pixel",
+    "description": "Python для начинающих"
   },
   {
-    id: 'it5',
-    directionId: 'it',
-    name: 'App Inventor',
-    description: 'Разработка мобильных проложений'
+    "id": "it4",
+    "directionId": "it",
+    "name": "Программировнаие на языке Pascal",
+    "description": ""
   },
   {
-    id: 'it6',
-    directionId: 'it',
-    name: 'Основы алгоритмизации',
-    description: ''
+    "id": "it5",
+    "directionId": "it",
+    "name": "App Inventor",
+    "description": "Разработка мобильных проложений"
   },
   {
-    id: 'it7',
-    directionId: 'it',
-    name: 'Спортивный программист',
-    description: 'Подготовка учащихся к олимпиаде по информатике'
+    "id": "it6",
+    "directionId": "it",
+    "name": "Основы алгоритмизации",
+    "description": ""
   },
   {
-    id: 'it8',
-    directionId: 'it',
-    name: 'Web Dev',
-    description: ''
+    "id": "it7",
+    "directionId": "it",
+    "name": "Спортивный программист",
+    "description": "Подготовка учащихся к олимпиаде по информатике"
   },
   {
-    id: 'it9',
-    directionId: 'it',
-    name: 'Python',
-    description: ''
+    "id": "it8",
+    "directionId": "it",
+    "name": "Web Dev",
+    "description": ""
   },
   {
-    id: 'it10',
-    directionId: 'it',
-    name: 'C++',
-    description: ''
+    "id": "it9",
+    "directionId": "it",
+    "name": "Python",
+    "description": ""
   },
   {
-    id: 'it11',
-    directionId: 'it',
-    name: 'C#',
-    description: ''
+    "id": "it10",
+    "directionId": "it",
+    "name": "C++",
+    "description": ""
   },
   {
-    id: 'it12',
-    directionId: 'it',
-    name: 'Java',
-    description: ''
+    "id": "it11",
+    "directionId": "it",
+    "name": "C#",
+    "description": ""
   },
   {
-    id: 'it13',
-    directionId: 'it',
-    name: 'Нейросети',
-    description: 'После курса Python'
+    "id": "it12",
+    "directionId": "it",
+    "name": "Java",
+    "description": ""
   },
   {
-    id: 'it14',
-    directionId: 'it',
-    name: 'Компьютерное зрение',
-    description: 'После курса Python'
+    "id": "it13",
+    "directionId": "it",
+    "name": "Нейросети",
+    "description": "После курса Python"
   },
   {
-    id: 'it15',
-    directionId: 'it',
-    name: '.NEXT',
-    description: ''
+    "id": "it14",
+    "directionId": "it",
+    "name": "Компьютерное зрение",
+    "description": "После курса Python"
   },
   {
-    id: 'it16',
-    directionId: 'it',
-    name: 'Системное администрирование',
-    description: ''
+    "id": "it15",
+    "directionId": "it",
+    "name": ".NEXT",
+    "description": ""
   },
-    
-  // Электроника
   {
-    id: 'el1',
-    directionId: 'electronics',
-    name: 'Цифровая схемотехника',
-    description: 'Логические элементы и микросхемы'
+    "id": "it16",
+    "directionId": "it",
+    "name": "Системное администрирование",
+    "description": ""
+  },
+  {
+    "id": "el1",
+    "directionId": "electronics",
+    "name": "Цифровая схемотехника",
+    "description": "Логические элементы и микросхемы"
   }
 ];
+}
