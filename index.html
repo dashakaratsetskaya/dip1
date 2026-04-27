@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебно-методический портал · Просмотр файлов и видео</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- idb -->
+    <script src="https://cdn.jsdelivr.net/npm/idb@7/build/umd.js"></script>
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif; }
+    body { background: #f8f9fa; color: #202124; }
+    .classroom-header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 24px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .logo-area { display: flex; align-items: center; gap: 8px; }
+    .logo-icon { font-size: 28px; color: #1a73e8; }
+    .logo-text { font-size: 22px; font-weight: 400; color: #5f6368; letter-spacing: -0.5px; }
+    .logo-text strong { font-weight: 500; color: #202124; }
+    .main-wrapper { display: flex; max-width: 100%; margin: 0; padding: 24px 0 0 0; gap: 30px; }
+    .sidebar { width: 280px; flex-shrink: 0; margin-left: 24px; }
+    .sidebar-menu { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .menu-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; color: #3c4043; font-size: 15px; font-weight: 500; border-bottom: 1px solid #f1f3f4; cursor: pointer; transition: background 0.15s; }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item i { width: 24px; color: #5f6368; font-size: 18px; }
+    .menu-item.active { background: #e8f0fe; color: #1a73e8; border-left: 4px solid #1a73e8; }
+    .menu-item.active i { color: #1a73e8; }
+    .menu-item:hover:not(.active) { background: #f8f9fa; }
+    .content-area { flex: 1; min-width: 0; padding-right: 24px; }
+    .section-title { font-size: 22px; font-weight: 400; color: #202124; margin-bottom: 20px; display: flex; align-items: center; }
+    .section-title i { color: #1a73e8; margin-right: 12px; font-size: 24px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .search-wrapper { display: flex; align-items: center; background: white; border: 1px solid #dadce0; border-radius: 24px; padding: 8px 16px; width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .search-wrapper i { color: #5f6368; margin-right: 12px; font-size: 16px; }
+    .search-wrapper input { border: none; outline: none; font-size: 15px; width: 100%; background: transparent; }
+
+    .direction-grid, .program-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: flex-start; }
+    .direction-card, .program-card { flex: 0 0 280px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #e8eaed; transition: box-shadow 0.2s, transform 0.1s; cursor: pointer; }
+    .direction-card:hover, .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .card-banner { height: 90px; background-size: cover; }
+    .banner-blue { background: #1a73e8; } .banner-green { background: #129eaf; } .banner-purple { background: #9334e6; } .banner-orange { background: #e8710a; } .banner-red { background: #c5221f; } .banner-teal { background: #007b83; } .banner-amber { background: #b65700; } .banner-lightblue { background: #4285f4; } .banner-indigo { background: #3f51b5; }
+    .card-content { padding: 18px 16px 16px; }
+    .card-title { font-size: 18px; font-weight: 500; color: #202124; margin-bottom: 6px; }
+    .card-description { font-size: 13px; color: #5f6368; line-height: 1.4; }
+
+    .programs-container, .program-detail-container { display: none; margin-top: 8px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: #1a73e8; font-weight: 500; margin-bottom: 16px; cursor: pointer; }
+    .back-link i { font-size: 16px; }
+    .detail-header { margin-bottom: 24px; }
+    .detail-title { font-size: 28px; font-weight: 400; }
+    .detail-description { color: #5f6368; margin-top: 4px; }
+
+    .materials-tabs { display: flex; border-bottom: 1px solid #e0e0e0; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 12px 20px; background: none; border: none; font-size: 15px; font-weight: 500; color: #5f6368; cursor: pointer; border-bottom: 3px solid transparent; }
+    .tab-btn.active { color: #1a73e8; border-bottom-color: #1a73e8; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    .material-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .add-buttons { display: flex; gap: 10px; }
+    .add-file-btn { background: #1a73e8; color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
+    .add-file-btn:hover { background: #1557b0; }
+    .add-link-btn { background: white; color: #1a73e8; border: 1px solid #dadce0; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
+    .add-link-btn:hover { background: #f1f3f4; }
+    .file-input { display: none; }
+
+    .material-list { list-style: none; }
+    .material-list li { padding: 12px 8px; border-bottom: 1px solid #f1f3f4; display: flex; align-items: center; gap: 12px; border-radius: 8px; }
+    .material-list li:hover { background: #f8f9fa; }
+    .material-list li i:first-child { width: 24px; color: #5f6368; }
+    .material-list li .file-info { flex: 1; display: flex; flex-direction: column; }
+    .file-name { font-weight: 500; color: #202124; }
+    .file-meta { font-size: 12px; color: #5f6368; display: flex; gap: 12px; margin-top: 2px; }
+    .file-actions { display: flex; gap: 8px; }
+    .file-actions i { cursor: pointer; padding: 6px; border-radius: 50%; color: #5f6368; transition: background 0.2s; }
+    .file-actions i:hover { background: #e8eaed; }
+
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; border-radius: 16px; max-width: 90%; max-height: 90%; overflow: auto; padding: 20px; position: relative; }
+    .modal-content.video-mode { width: 90%; max-width: 1200px; }
+    .modal-close { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #5f6368; }
+    .modal-body { margin-top: 10px; }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    .docs-container { display: none; background: transparent; margin-top: 8px; }
+    .docs-section { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; padding: 20px 24px; margin-bottom: 24px; }
+    .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
+    .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
+    .doc-list { list-style: none; }
+    .doc-list li { padding: 12px 8px; border-bottom: 1px solid #f1f3f4; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #3c4043; cursor: pointer; border-radius: 8px; }
+    .doc-list li:hover { background: #f8f9fa; }
+    .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
+    .doc-list .doc-name { flex: 1; line-height: 1.4; }
+    .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
+
+    .portal-footer { margin-top: 40px; padding: 16px 24px; text-align: center; border-top: 1px solid #e0e0e0; color: #5f6368; font-size: 13px; background: #fff; }
+
+    @media (max-width: 900px) {
+      .main-wrapper { flex-direction: column; padding-left: 0; }
+      .sidebar { width: 100%; margin-left: 0; padding: 0 16px; }
+      .content-area { padding-left: 16px; padding-right: 16px; }
+      .toolbar { flex-direction: column; align-items: stretch; gap: 12px; }
+      .search-wrapper { width: 100%; }
+      .direction-card, .program-card { flex: 0 0 260px; }
+    }
+    </style>
+</head>
+<body>
+
+<header class="classroom-header">
+    <div class="header-left">
+    <div class="logo-area">
+        <i class="fas fa-chalkboard-teacher logo-icon"></i>
+        <span class="logo-text"><strong>Учебно-методический</strong> портал</span>
+    </div>
+    </div>
+</header>
+
+<div class="main-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-menu">
+      <div class="menu-item active" data-view="courses"><i class="fas fa-book-open"></i><span>Курсы</span></div>
+      <div class="menu-item" data-view="contests"><i class="fas fa-trophy"></i><span>Конкурсы</span></div>
+      <div class="menu-item" data-view="docs"><i class="fas fa-file-alt"></i><span>Нормативные документы</span></div>
+      <div class="menu-item" data-view="support"><i class="fas fa-headset"></i><span>Поддержка</span></div>
+    </div>
+  </aside>
+
+  <main class="content-area">
+    <div id="coursesHeader">
+      <div class="section-title"><i class="fas fa-th-large"></i> Направления обучения</div>
+      <div class="toolbar">
+        <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" placeholder="Поиск по направлениям..." id="directionSearch"></div>
+      </div>
+    </div>
+
+    <div class="direction-grid" id="directionGrid"></div>
+
+    <div class="programs-container" id="programsView">
+      <div class="back-link" id="backToDirections"><i class="fas fa-arrow-left"></i> Все направления</div>
+      <div class="section-title" id="programsTitle"><i class="fas fa-layer-group"></i> <span id="directionNameLabel">Программы</span></div>
+      <div class="program-grid" id="programGrid"></div>
+    </div>
+
+    <div class="program-detail-container" id="programDetailView">
+      <div class="back-link" id="backToPrograms"><i class="fas fa-arrow-left"></i> К списку программ</div>
+      <div class="detail-header">
+        <div class="detail-title" id="programDetailTitle">Название программы</div>
+        <div class="detail-description" id="programDetailDesc">Описание программы</div>
+      </div>
+      <div class="materials-tabs">
+        <button class="tab-btn active" data-tab="syllabus">Программа курса</button>
+        <button class="tab-btn" data-tab="materials">Материалы</button>
+        <button class="tab-btn" data-tab="presentations">Презентации</button>
+        <button class="tab-btn" data-tab="masterclasses">Мастер-классы</button>
+        <button class="tab-btn" data-tab="videos">Видеолекции</button>
+      </div>
+      <div class="tab-pane active" id="tab-syllabus">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputSyllabus" class="file-input" multiple><button class="add-file-btn" data-target="syllabus"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="syllabusList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-materials">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMaterials" class="file-input" multiple><button class="add-file-btn" data-target="materials"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="materialsList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-presentations">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputPresentations" class="file-input" multiple><button class="add-file-btn" data-target="presentations"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="presentationsList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-masterclasses">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMasterclasses" class="file-input" multiple><button class="add-file-btn" data-target="masterclasses"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="masterclasses"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
+        <ul class="material-list" id="masterclassesList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-videos">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputVideos" class="file-input" multiple><button class="add-file-btn" data-target="videos"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="videos"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
+        <ul class="material-list" id="videosList"></ul>
+      </div>
+    </div>
+
+    <div class="docs-container" id="docsContainer">
+      <div class="docs-section" data-section="1"><div class="docs-section-header"><i class="fas fa-gavel"></i><span>1. Законодательные акты</span></div><ul class="doc-list"><li data-docname="Закон об изменении Кодекса об образовании"><i class="far fa-file-pdf"></i><span class="doc-name">Закон об изменении Кодекса об образовании</span><span class="badge-new">новое</span></li><li data-docname="Закон о государственных символах"><i class="far fa-file-alt"></i><span class="doc-name">Закон о государственных символах</span></li><li data-docname="Закон о защите персональных данных"><i class="far fa-file-alt"></i><span class="doc-name">Закон о защите персональных данных</span></li></ul></div>
+      <div class="docs-section" data-section="2"><div class="docs-section-header"><i class="fas fa-graduation-cap"></i><span>2. Образовательный процесс</span></div><ul class="doc-list"><li data-docname="Изменения в Кодексе с 1 сентября"><i class="far fa-file"></i><span class="doc-name">Изменения в Кодексе с 1 сентября</span></li><li data-docname="Особенности реализации 2025–2026"><i class="far fa-file"></i><span class="doc-name">Особенности реализации 2025–2026</span></li></ul></div>
+      <div class="docs-section" data-section="3"><div class="docs-section-header"><i class="fas fa-compass"></i><span>3. Концепции и стратегии</span></div><ul class="doc-list"><li data-docname="Концепция непрерывного воспитания"><i class="far fa-file"></i><span class="doc-name">Концепция непрерывного воспитания</span></li></ul></div>
+      <div class="docs-section" data-section="4"><div class="docs-section-header"><i class="fas fa-users"></i><span>4. Государственные программы</span></div><ul class="doc-list"><li data-docname="Программа патриотического воспитания 2022–2025"><i class="far fa-file"></i><span class="doc-name">Программа патриотического воспитания</span></li></ul></div>
+      <div class="docs-section" data-section="5"><div class="docs-section-header"><i class="fas fa-flask"></i><span>5. Научная и инновационная деятельность</span></div><ul class="doc-list"><li data-docname="Указ №156 о приоритетных направлениях"><i class="far fa-file"></i><span class="doc-name">Указ №156</span></li></ul></div>
+      <div class="docs-section" data-section="6"><div class="docs-section-header"><i class="fas fa-school"></i><span>6. Организация деятельности</span></div><ul class="doc-list"><li data-docname="Положение о педагогическом совете"><i class="far fa-file"></i><span class="doc-name">Положение о педсовете</span></li></ul></div>
+      <div class="docs-section" data-section="7"><div class="docs-section-header"><i class="fas fa-shield-alt"></i><span>7. Безопасность</span></div><ul class="doc-list"><li data-docname="Правила безопасности"><i class="far fa-file"></i><span class="doc-name">Правила безопасности</span></li></ul></div>
+      <div class="docs-section" data-section="8"><div class="docs-section-header"><i class="fas fa-calendar-alt"></i><span>8. Мероприятия</span></div><ul class="doc-list"><li data-docname="Перечень мероприятий"><i class="far fa-file"></i><span class="doc-name">Перечень мероприятий</span></li></ul></div>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="previewModal">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer class="portal-footer">© 2026 Учебно-методический портал · Все материалы для преподавателей</footer>
+
+<script>
+  (function(){
+    // ---------- Глобальные данные ----------
+    let appData = {
+      directions: [],   // массив объектов { id, title, bannerClass, description }
+      programs: []      // массив объектов { id, directionId, name, description }
+    };
+    let currentDirectionId = null;
+    let currentDirectionTitle = null;
+    let currentProgramId = null;
+
+    // ---------- IndexedDB ----------
+    let dbPromise;
+    function initDB() {
+      dbPromise = idb.openDB('edu-portal-db', 2, {
+        upgrade(db, oldVersion) {
+          if (!db.objectStoreNames.contains('files')) {
+            const store = db.createObjectStore('files', { keyPath: 'id' });
+            store.createIndex('programId', 'programId');
+            store.createIndex('type', 'type');
+          }
+        }
+      });
+    }
+    initDB();
+
+    async function saveFile(programId, type, file) {
+      const db = await dbPromise;
+      const id = `${programId}_${type}_${Date.now()}_${file.name}`;
+      let mimeType = file.type;
+      if (!mimeType || mimeType === 'application/octet-stream') {
+        const ext = file.name.split('.').pop().toLowerCase();
+        const mimeMap = {
+          'doc': 'application/msword',
+          'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'xls': 'application/vnd.ms-excel',
+          'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'ppt': 'application/vnd.ms-powerpoint',
+          'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          'pdf': 'application/pdf',
+          'txt': 'text/plain',
+          'jpg': 'image/jpeg',
+          'jpeg': 'image/jpeg',
+          'png': 'image/png',
+          'gif': 'image/gif',
+          'mp4': 'video/mp4',
+          'webm': 'video/webm',
+          'mov': 'video/quicktime'
+        };
+        mimeType = mimeMap[ext] || 'application/octet-stream';
+      }
+      const fileData = {
+        id, programId, type, name: file.name, size: file.size,
+        lastModified: file.lastModified, mimeType: mimeType,
+        blob: file, isLink: false
+      };
+      await db.add('files', fileData);
+      return fileData;
+    }
+
+    async function saveLink(programId, type, url, title) {
+      const db = await dbPromise;
+      const id = `${programId}_${type}_link_${Date.now()}`;
+      const linkData = {
+        id, programId, type, isLink: true, url, title: title || url,
+        name: title || url, mimeType: 'video/link', size: 0, lastModified: Date.now()
+      };
+      await db.add('files', linkData);
+      return linkData;
+    }
+
+    async function getFiles(programId, type) {
+      const db = await dbPromise;
+      const all = await db.getAllFromIndex('files', 'programId', programId);
+      return all.filter(f => f.type === type);
+    }
+
+    async function deleteFile(fileId) {
+      const db = await dbPromise;
+      await db.delete('files', fileId);
+    }
+
+    // ---------- Загрузка данных из JSON ----------
+    async function loadData() {
+      try {
+        const [dirRes, progRes] = await Promise.all([
+          fetch('data/directions.json'),
+          fetch('data/programs.json')
+        ]);
+        if (!dirRes.ok || !progRes.ok) throw new Error('HTTP error');
+        const dirData = await dirRes.json();
+        const progData = await progRes.json();
+        appData.directions = dirData.directions || [];
+        appData.programs = progData.programs || [];
+      } catch (err) {
+        console.error('loadData failed', err);
+        alert('Ошибка загрузки содержимого портала. Проверьте наличие папки data и файлов directions.json, programs.json');
+      }
+    }
+
+    function getProgramsByDirection(directionId) {
+      return appData.programs.filter(p => p.directionId === directionId);
+    }
+
+    // ---------- Рендер ----------
+    const directionGrid = document.getElementById('directionGrid');
+    const programsView = document.getElementById('programsView');
+    const programDetailView = document.getElementById('programDetailView');
+    const coursesHeader = document.getElementById('coursesHeader');
+    const docsContainer = document.getElementById('docsContainer');
+    const directionSearch = document.getElementById('directionSearch');
+    const directionNameSpan = document.getElementById('directionNameLabel');
+    const programGrid = document.getElementById('programGrid');
+    const backToDirections = document.getElementById('backToDirections');
+    const backToPrograms = document.getElementById('backToPrograms');
+    const programDetailTitle = document.getElementById('programDetailTitle');
+    const programDetailDesc = document.getElementById('programDetailDesc');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    const lists = {
+      syllabus: document.getElementById('syllabusList'),
+      materials: document.getElementById('materialsList'),
+      presentations: document.getElementById('presentationsList'),
+      masterclasses: document.getElementById('masterclassesList'),
+      videos: document.getElementById('videosList')
+    };
+
+    const fileInputs = {
+      syllabus: document.getElementById('fileInputSyllabus'),
+      materials: document.getElementById('fileInputMaterials'),
+      presentations: document.getElementById('fileInputPresentations'),
+      masterclasses: document.getElementById('fileInputMasterclasses'),
+      videos: document.getElementById('fileInputVideos')
+    };
+
+    function renderDirections() {
+      directionGrid.innerHTML = '';
+      appData.directions.forEach(dir => {
+        const card = document.createElement('div');
+        card.className = 'direction-card';
+        card.setAttribute('data-id', dir.id);
+        card.innerHTML = `
+          <div class="card-banner ${dir.bannerClass}"></div>
+          <div class="card-content">
+            <div class="card-title">${escapeHtml(dir.title)}</div>
+            <div class="card-description">${escapeHtml(dir.description)}</div>
+          </div>
+        `;
+        card.addEventListener('click', () => openDirection(dir.id, dir.title));
+        directionGrid.appendChild(card);
+      });
+    }
+
+    function openDirection(directionId, directionTitle) {
+      currentDirectionId = directionId;
+      currentDirectionTitle = directionTitle;
+      const programs = getProgramsByDirection(directionId);
+      directionNameSpan.textContent = directionTitle;
+      programGrid.innerHTML = '';
+      if (programs.length === 0) {
+        programGrid.innerHTML = '<div style="padding:20px; color:#5f6368;">Нет программ в этом направлении</div>';
+      } else {
+        programs.forEach(prog => {
+          const card = document.createElement('div');
+          card.className = 'program-card';
+          card.innerHTML = `
+            <div class="card-banner banner-lightblue"></div>
+            <div class="card-content">
+              <div class="card-title">${escapeHtml(prog.name)}</div>
+              <div class="card-description">${escapeHtml(prog.description)}</div>
+            </div>
+          `;
+          card.addEventListener('click', () => openProgram(prog.id, prog.name, prog.description));
+          programGrid.appendChild(card);
+        });
+      }
+      directionGrid.style.display = 'none';
+      programsView.style.display = 'block';
+      programDetailView.style.display = 'none';
+      coursesHeader.style.display = 'none';
+    }
+
+    async function openProgram(programId, name, description) {
+      currentProgramId = programId;
+      programDetailTitle.textContent = name;
+      programDetailDesc.textContent = description;
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      document.querySelector('[data-tab="syllabus"]').classList.add('active');
+      document.getElementById('tab-syllabus').classList.add('active');
+      
+      await loadFilesForAllTabs(programId);
+      
+      programsView.style.display = 'none';
+      programDetailView.style.display = 'block';
+    }
+
+    async function loadFilesForAllTabs(programId) {
+      for (let type of ['syllabus', 'materials', 'presentations', 'masterclasses', 'videos']) {
+        const files = await getFiles(programId, type);
+        renderFileList(lists[type], files, type, programId);
+      }
+    }
+
+    function renderFileList(container, items, type, programId) {
+      container.innerHTML = '';
+      if (!items.length) {
+        container.innerHTML = '<li style="justify-content:center; color:#5f6368;">Нет материалов</li>';
+        return;
+      }
+      items.sort((a,b) => a.name.localeCompare(b.name));
+      items.forEach(item => {
+        const li = document.createElement('li');
+        const isLink = item.isLink;
+        const icon = isLink ? 'fas fa-link' : getFileIcon(item.mimeType);
+        const sizeStr = isLink ? 'Ссылка' : formatBytes(item.size);
+        const displayName = item.title || item.name;
+        
+        li.innerHTML = `
+          <i class="${icon}"></i>
+          <div class="file-info">
+            <span class="file-name">${escapeHtml(displayName)}</span>
+            <span class="file-meta">
+              <span>${sizeStr}</span>
+              <span>${new Date(item.lastModified).toLocaleDateString()}</span>
+            </span>
+          </div>
+          <div class="file-actions">
+            <i class="fas fa-eye" title="Открыть" data-action="open" data-id="${item.id}"></i>
+            ${!isLink ? '<i class="fas fa-download" title="Скачать" data-action="download" data-id="' + item.id + '"></i>' : ''}
+            <i class="fas fa-trash-alt" title="Удалить" data-action="delete" data-id="${item.id}"></i>
+          </div>
+        `;
+        
+        li.querySelector('[data-action="open"]').addEventListener('click', (e) => {
+          e.stopPropagation();
+          openItem(item);
+        });
+        const downloadBtn = li.querySelector('[data-action="download"]');
+        if (downloadBtn) {
+          downloadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            downloadFile(item);
+          });
+        }
+        li.querySelector('[data-action="delete"]').addEventListener('click', async (e) => {
+          e.stopPropagation();
+          if (confirm(`Удалить "${displayName}"?`)) {
+            await deleteFile(item.id);
+            await loadFilesForAllTabs(programId);
+          }
+        });
+        container.appendChild(li);
+      });
+    }
+
+    // ---------- Предпросмотр и скачивание ----------
+    const modal = document.getElementById('previewModal');
+    const modalBody = document.getElementById('modalBody');
+    const modalContent = document.querySelector('.modal-content');
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalContent.classList.remove('video-mode');
+      modalBody.innerHTML = '';
+    }
+
+    function openItem(item) {
+      closeModal();
+      modalContent.classList.remove('video-mode');
+
+      if (item.isLink) {
+        const url = item.url;
+        const isVideoFile = /\.(mp4|webm|mov|ogg)$/i.test(url);
+        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/?#]+)/);
+        const isVimeo = url.includes('vimeo.com');
+
+        if (ytMatch) {
+          const videoId = ytMatch[1];
+          const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}`;
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `
+            <h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3>
+            <div class="video-container" id="yt-container">
+              <iframe id="yt-iframe" src="${embedUrl}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+            <div id="yt-error-message" style="display:none; text-align:center; padding:20px;">
+              <p style="color: #c5221f; margin-bottom:16px;">⚠️ Видео заблокировано для встраивания.</p>
+              <button id="retry-embed" style="background:#1a73e8; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; margin-right:10px;"><i class="fas fa-sync-alt"></i> Попробовать снова</button>
+              <a href="${url}" target="_blank" style="background:#fff; color:#1a73e8; border:1px solid #dadce0; padding:10px 20px; border-radius:20px; text-decoration:none;"><i class="fab fa-youtube"></i> Смотреть на YouTube</a>
+            </div>
+          `;
+          const iframe = modalBody.querySelector('#yt-iframe');
+          const errorDiv = modalBody.querySelector('#yt-error-message');
+          const retryBtn = modalBody.querySelector('#retry-embed');
+          iframe.addEventListener('error', () => { iframe.style.display = 'none'; errorDiv.style.display = 'block'; });
+          retryBtn.addEventListener('click', () => {
+            const newUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&origin=${encodeURIComponent(window.location.origin)}`;
+            iframe.src = newUrl;
+            iframe.style.display = '';
+            errorDiv.style.display = 'none';
+            iframe.addEventListener('error', () => { iframe.style.display = 'none'; errorDiv.style.display = 'block'; }, { once: true });
+          });
+          modal.classList.add('active');
+          return;
+        } else if (isVimeo) {
+          const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+          let embedUrl = url;
+          if (vimeoMatch) embedUrl = `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `
+            <h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3>
+            <div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe></div>
+            <p style="margin-top:16px"><a href="${url}" target="_blank">Открыть оригинал <i class="fas fa-external-link-alt"></i></a></p>
+          `;
+          modal.classList.add('active');
+          return;
+        } else if (isVideoFile) {
+          modalBody.innerHTML = `
+            <h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3>
+            <video controls style="max-width:100%; max-height:70vh; display:block; margin:0 auto;"><source src="${url}" type="video/mp4">Ваш браузер не поддерживает видео.</video>
+            <p style="margin-top:16px"><a href="${url}" target="_blank">Открыть оригинал <i class="fas fa-external-link-alt"></i></a></p>
+          `;
+          modal.classList.add('active');
+          return;
+        } else {
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `
+            <h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3>
+            <div class="video-container"><iframe src="${url}" frameborder="0" allowfullscreen></iframe></div>
+            <p style="margin-top:16px"><a href="${url}" target="_blank">Открыть оригинал <i class="fas fa-external-link-alt"></i></a></p>
+          `;
+          modal.classList.add('active');
+          return;
+        }
+      } else {
+        const blob = item.blob;
+        if (!blob) {
+          modalBody.innerHTML = `<p>Ошибка: файл недоступен для предпросмотра.</p>`;
+          modal.classList.add('active');
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        const mime = item.mimeType;
+        
+        if (mime.startsWith('image/')) {
+          modalBody.innerHTML = `<img src="${url}" style="max-width:100%; max-height:80vh; display:block; margin:0 auto;" alt="${item.name}">`;
+        } else if (mime === 'application/pdf') {
+          modalBody.innerHTML = `<iframe src="${url}" width="100%" height="80vh" frameborder="0"></iframe>`;
+        } else if (mime.startsWith('text/')) {
+          fetch(url).then(r => r.text()).then(text => {
+            modalBody.innerHTML = `<pre style="white-space:pre-wrap; max-height:80vh; overflow:auto;">${escapeHtml(text)}</pre>`;
+          }).catch(err => {
+            modalBody.innerHTML = `<p>Не удалось загрузить текст: ${err.message}</p>`;
+          });
+        } else if (mime.startsWith('video/') || mime.startsWith('audio/')) {
+          modalBody.innerHTML = `<video controls style="max-width:100%; max-height:80vh;"><source src="${url}" type="${mime}"></video>`;
+        } else if (
+          mime === 'application/msword' ||
+          mime === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+          mime === 'application/vnd.ms-excel' ||
+          mime === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+          mime === 'application/vnd.ms-powerpoint' ||
+          mime === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        ) {
+          modalBody.innerHTML = `
+            <h3 style="margin-bottom:16px">${escapeHtml(item.name)}</h3>
+            <p style="margin-bottom:24px; color:#5f6368;">📄 Этот файл будет открыт в новой вкладке средствами вашего браузера.</p>
+            <div style="display:flex; gap:12px; justify-content:center;">
+              <button id="openInNewTabBtn" style="background:#1a73e8; color:white; border:none; border-radius:20px; padding:10px 24px; font-weight:500; cursor:pointer;"><i class="fas fa-external-link-alt"></i> Открыть в новой вкладке</button>
+              <a id="downloadOfficeBtn" href="${url}" download="${item.name}" style="background:#fff; color:#1a73e8; border:1px solid #dadce0; border-radius:20px; padding:10px 24px; font-weight:500; text-decoration:none;"><i class="fas fa-download"></i> Скачать</a>
+            </div>
+          `;
+          const openBtn = modalBody.querySelector('#openInNewTabBtn');
+          openBtn.addEventListener('click', () => { window.open(url, '_blank'); closeModal(); });
+        } else {
+          modalBody.innerHTML = `<p>Предпросмотр недоступен. <a href="${url}" download="${item.name}">Скачать файл</a></p>`;
+        }
+        modal.classList.add('active');
+        const cleanup = () => URL.revokeObjectURL(url);
+        modal.addEventListener('click', (e) => { if (e.target === modal) cleanup(); }, { once: true });
+        document.getElementById('modalClose').addEventListener('click', cleanup, { once: true });
+      }
+    }
+
+    function downloadFile(file) {
+      if (!file.blob) return;
+      const url = URL.createObjectURL(file.blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ---------- Утилиты ----------
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function getFileIcon(mime) {
+      if (mime.includes('pdf')) return 'far fa-file-pdf';
+      if (mime.includes('word')) return 'far fa-file-word';
+      if (mime.includes('excel')) return 'far fa-file-excel';
+      if (mime.includes('powerpoint')) return 'far fa-file-powerpoint';
+      if (mime.includes('image')) return 'far fa-file-image';
+      if (mime.includes('video')) return 'far fa-file-video';
+      if (mime.includes('audio')) return 'far fa-file-audio';
+      return 'far fa-file';
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // ---------- Обработчики загрузки ----------
+    async function handleFileUpload(type, files) {
+      if (!currentProgramId) return;
+      for (let file of files) {
+        await saveFile(currentProgramId, type, file);
+      }
+      await loadFilesForAllTabs(currentProgramId);
+    }
+
+    async function handleAddLink(type) {
+      if (!currentProgramId) return;
+      const url = prompt('Введите ссылку на видео (YouTube, Vimeo или прямая ссылка):');
+      if (!url) return;
+      const title = prompt('Введите название (необязательно):', 'Видео');
+      await saveLink(currentProgramId, type, url, title || 'Видео');
+      await loadFilesForAllTabs(currentProgramId);
+    }
+
+    document.querySelectorAll('.add-file-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        const input = fileInputs[target];
+        if (input) input.click();
+      });
+    });
+
+    for (let [type, input] of Object.entries(fileInputs)) {
+      input.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+          handleFileUpload(type, e.target.files);
+          input.value = '';
+        }
+      });
+    }
+
+    document.querySelectorAll('.add-link-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        handleAddLink(target);
+      });
+    });
+
+    // ---------- Навигация ----------
+    function backToDirectionsView() {
+      directionGrid.style.display = 'flex';
+      programsView.style.display = 'none';
+      programDetailView.style.display = 'none';
+      coursesHeader.style.display = 'block';
+      currentDirectionId = null;
+    }
+
+    function backToProgramsView() {
+      if (currentDirectionId) {
+        programsView.style.display = 'block';
+        programDetailView.style.display = 'none';
+      } else {
+        backToDirectionsView();
+      }
+    }
+
+    function filterDirections() {
+      const query = directionSearch.value.toLowerCase().trim();
+      document.querySelectorAll('.direction-card').forEach(card => {
+        const titleEl = card.querySelector('.card-title');
+        const title = titleEl ? titleEl.innerText.toLowerCase() : '';
+        card.style.display = (query === '' || title.includes(query)) ? '' : 'none';
+      });
+    }
+
+    function switchView(viewId) {
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => item.classList.toggle('active', item.getAttribute('data-view') === viewId));
+      if (viewId === 'courses') {
+        directionGrid.style.display = 'flex';
+        programsView.style.display = 'none';
+        programDetailView.style.display = 'none';
+        coursesHeader.style.display = 'block';
+        docsContainer.style.display = 'none';
+        const titleEl = coursesHeader.querySelector('.section-title');
+        if (titleEl) titleEl.innerHTML = '<i class="fas fa-th-large"></i> Направления обучения';
+        currentDirectionId = null;
+      } else if (viewId === 'docs') {
+        directionGrid.style.display = 'none';
+        programsView.style.display = 'none';
+        programDetailView.style.display = 'none';
+        coursesHeader.style.display = 'none';
+        docsContainer.style.display = 'block';
+      } else {
+        directionGrid.style.display = 'none';
+        programsView.style.display = 'none';
+        programDetailView.style.display = 'none';
+        coursesHeader.style.display = 'block';
+        docsContainer.style.display = 'none';
+        const titleEl = coursesHeader.querySelector('.section-title');
+        if (titleEl) {
+          if (viewId === 'contests') titleEl.innerHTML = '<i class="fas fa-trophy"></i> Конкурсы';
+          else if (viewId === 'support') titleEl.innerHTML = '<i class="fas fa-headset"></i> Поддержка';
+        }
+        alert(`Раздел "${viewId === 'contests' ? 'Конкурсы' : 'Поддержка'}" находится в разработке.`);
+      }
+    }
+
+    // Табы
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+      });
+    });
+
+    // Документы (демо)
+    document.querySelectorAll('.doc-list li').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const docName = item.querySelector('.doc-name')?.innerText || 'документ';
+        alert(`📄 Открыть документ:\n«${docName}»\n(демонстрационный режим)`);
+      });
+    });
+
+    // ---------- Инициализация приложения ----------
+    (async function init() {
+      await loadData();
+      if (appData.directions.length === 0) {
+        directionGrid.innerHTML = '<div style="padding:20px; color:#c5221f;">Не удалось загрузить направления. Проверьте папку data/ и файлы directions.json, programs.json</div>';
+      } else {
+        renderDirections();
+      }
+      // Привязываем обработчики, которые зависят от DOM
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => item.addEventListener('click', () => switchView(item.getAttribute('data-view'))));
+      directionSearch.addEventListener('input', filterDirections);
+      backToDirections.addEventListener('click', backToDirectionsView);
+      backToPrograms.addEventListener('click', backToProgramsView);
+      switchView('courses');
+    })();
+  })();
+</script>
+</body>
+</html>
