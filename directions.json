@@ -23,6 +23,12 @@
         "title": "Естественно-математическое",
         "bannerClass": "banner-orange",
         "description": "Математика, физика..."
-    }
+    },
+    {
+        "id": "sots",
+        "title": "Социально-гуманитарное",
+        "bannerClass": "banner-red",
+        "description": "Языки"
+    },  
     ]
 }
