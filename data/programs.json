@@ -1,44 +1,44 @@
 {
   "programs": [
     {
-      "id": 1,
-      "directionId": 101,
+      "id": 101,
+      "directionId": 1,
       "name": "Робототехника LEGO WEDO",
       "description": "Основы конструирования и программирования для начинающих"
     },
     {
       "id": 2,
-      "directionId": 102,
+      "directionId": 1,
       "name": "Робототехника EV3",
       "description": "Программирование роботов LEGO Mindstorms EV3"
     },
     {
       "id": 3,
-      "directionId": 103,
+      "directionId": 1,
       "name": "Arduino 4U",
       "description": "Основы программирования микроконтроллеров Arduino"
     },
     {
       "id": 4,
-      "directionId": 201,
+      "directionId": 2,
       "name": "Компьютерная грамотность",
       "description": "Базовые навыки работы с компьютером и интернетом"
     },
     {
       "id": 5,
-      "directionId": 202,
+      "directionId": 2,
       "name": "Юный программист",
       "description": "Первые шаги в программировании для школьников"
     },
     {
       "id": 6,
-      "directionId": 203,
+      "directionId": 2,
       "name": "Pixel",
       "description": "Python для начинающих"
     },
     {
       "id": 7,
-      "directionId": 204,
+      "directionId": 2,
       "name": "Программирование на языке Pascal",
       "description": "Основы алгоритмизации и структурного программирования"
     },
