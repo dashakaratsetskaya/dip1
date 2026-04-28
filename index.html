@@ -89,17 +89,42 @@
     .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
     .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
     .doc-list { list-style: none; }
-    /* ИЗМЕНЕНО: убран border-bottom, цвет текста #000 */
+    /* Убран border-bottom, цвет текста чёрный */
     .doc-list li { padding: 12px 8px; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #000; cursor: pointer; border-radius: 8px; }
     .doc-list li:hover { background: #f8f9fa; }
     .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
     .doc-list .doc-name { flex: 1; line-height: 1.4; color: inherit; }
-    /* ИЗМЕНЕНО: ссылки без подчёркивания и чёрные */
-    .doc-list a { color: #000; text-decoration: none; }
-    .doc-list a:hover { text-decoration: none; }
+
+    /* Полный сброс подчёркивания для любых ссылок внутри документов */
+    .doc-list a,
+    .doc-list a:link,
+    .doc-list a:visited,
+    .doc-list a:hover,
+    .doc-list a:active {
+      text-decoration: none !important;
+      color: #000;
+    }
+
     .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
 
-    .portal-footer { margin-top: 40px; padding: 16px 24px; text-align: center; border-top: 1px solid #e0e0e0; color: #5f6368; font-size: 13px; background: #fff; }
+    /* Подвал — гарантированно без подчёркиваний и эффектов ссылок */
+    .portal-footer {
+      margin-top: 40px;
+      padding: 16px 24px;
+      text-align: center;
+      border-top: 1px solid #e0e0e0;
+      color: #5f6368;
+      font-size: 13px;
+      background: #fff;
+      text-decoration: none !important;
+      cursor: default;
+      pointer-events: none; /* убирает возможность клика */
+    }
+    .portal-footer * {
+      text-decoration: none !important;
+      color: inherit;
+      pointer-events: none;
+    }
 
     @media (max-width: 900px) {
       .main-wrapper { flex-direction: column; padding-left: 0; }
@@ -753,10 +778,7 @@
       });
     });
 
-    // УДАЛЁН блок, показывавший alert при клике на документы.
-    // Теперь ссылки внутри .doc-list li будут работать напрямую.
-
-    // ---------- Инициализация приложения ----------
+    // Инициализация приложения
     (async function init() {
       await loadData();
       if (appData.directions.length === 0) {
@@ -764,7 +786,6 @@
       } else {
         renderDirections();
       }
-      // Привязываем обработчики, которые зависят от DOM
       const menuItems = document.querySelectorAll('.menu-item');
       menuItems.forEach(item => item.addEventListener('click', () => switchView(item.getAttribute('data-view'))));
       directionSearch.addEventListener('input', filterDirections);
