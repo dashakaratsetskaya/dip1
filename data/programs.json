@@ -1,124 +1,124 @@
 {
-"programs" : [
-  {
-    "id": "rob1",
-    "directionId": "robotics",
-    "name": "Робототехника LEGO WEDO",
-    "description": "Конструирование и программирование LEGO Mindstorms"
-  },
-  {
-    "id": "rob2",
-    "directionId": "robotics",
-    "name": "Роботехника EV3",
-    "description": ""
-  },
-  {
-    "id": "rob3",
-    "directionId": "robotics",
-    "name": "ARUINO 4U",
-    "description": ""
-  },
-  {
-    "id": "it1",
-    "directionId": "it",
-    "name": "Компьютерная грамотность",
-    "description": ""
-  },
-  {
-    "id": "it2",
-    "directionId": "it",
-    "name": "Юный программист",
-    "description": ""
-  },
-  {
-    "id": "it3",
-    "directionId": "it",
-    "name": "Pixel",
-    "description": "Python для начинающих"
-  },
-  {
-    "id": "it4",
-    "directionId": "it",
-    "name": "Программировнаие на языке Pascal",
-    "description": ""
-  },
-  {
-    "id": "it5",
-    "directionId": "it",
-    "name": "App Inventor",
-    "description": "Разработка мобильных проложений"
-  },
-  {
-    "id": "it6",
-    "directionId": "it",
-    "name": "Основы алгоритмизации",
-    "description": ""
-  },
-  {
-    "id": "it7",
-    "directionId": "it",
-    "name": "Спортивный программист",
-    "description": "Подготовка учащихся к олимпиаде по информатике"
-  },
-  {
-    "id": "it8",
-    "directionId": "it",
-    "name": "Web Dev",
-    "description": ""
-  },
-  {
-    "id": "it9",
-    "directionId": "it",
-    "name": "Python",
-    "description": ""
-  },
-  {
-    "id": "it10",
-    "directionId": "it",
-    "name": "C++",
-    "description": ""
-  },
-  {
-    "id": "it11",
-    "directionId": "it",
-    "name": "C#",
-    "description": ""
-  },
-  {
-    "id": "it12",
-    "directionId": "it",
-    "name": "Java",
-    "description": ""
-  },
-  {
-    "id": "it13",
-    "directionId": "it",
-    "name": "Нейросети",
-    "description": "После курса Python"
-  },
-  {
-    "id": "it14",
-    "directionId": "it",
-    "name": "Компьютерное зрение",
-    "description": "После курса Python"
-  },
-  {
-    "id": "it15",
-    "directionId": "it",
-    "name": ".NEXT",
-    "description": ""
-  },
-  {
-    "id": "it16",
-    "directionId": "it",
-    "name": "Системное администрирование",
-    "description": ""
-  },
-  {
-    "id": "el1",
-    "directionId": "electronics",
-    "name": "Цифровая схемотехника",
-    "description": "Логические элементы и микросхемы"
-  }
-]
+  "programs": [
+    {
+      "id": 1,
+      "directionId": 1,
+      "name": "Робототехника LEGO WEDO",
+      "description": "Основы конструирования и программирования для начинающих"
+    },
+    {
+      "id": 2,
+      "directionId": 1,
+      "name": "Робототехника EV3",
+      "description": "Программирование роботов LEGO Mindstorms EV3"
+    },
+    {
+      "id": 3,
+      "directionId": 1,
+      "name": "Arduino 4U",
+      "description": "Основы программирования микроконтроллеров Arduino"
+    },
+    {
+      "id": 4,
+      "directionId": 2,
+      "name": "Компьютерная грамотность",
+      "description": "Базовые навыки работы с компьютером и интернетом"
+    },
+    {
+      "id": 5,
+      "directionId": 2,
+      "name": "Юный программист",
+      "description": "Первые шаги в программировании для школьников"
+    },
+    {
+      "id": 6,
+      "directionId": 2,
+      "name": "Pixel",
+      "description": "Python для начинающих"
+    },
+    {
+      "id": 7,
+      "directionId": 2,
+      "name": "Программирование на языке Pascal",
+      "description": "Основы алгоритмизации и структурного программирования"
+    },
+    {
+      "id": 8,
+      "directionId": 2,
+      "name": "App Inventor",
+      "description": "Разработка мобильных приложений"
+    },
+    {
+      "id": 9,
+      "directionId": 2,
+      "name": "Основы алгоритмизации",
+      "description": "Базовые алгоритмы и структуры данных"
+    },
+    {
+      "id": 10,
+      "directionId": 2,
+      "name": "Спортивное программирование",
+      "description": "Подготовка учащихся к олимпиадам по информатике"
+    },
+    {
+      "id": 11,
+      "directionId": 2,
+      "name": "Web Dev",
+      "description": "Создание веб-сайтов: HTML, CSS, JavaScript"
+    },
+    {
+      "id": 12,
+      "directionId": 2,
+      "name": "Python",
+      "description": "Углублённое изучение языка Python"
+    },
+    {
+      "id": 13,
+      "directionId": 2,
+      "name": "C++",
+      "description": "Программирование на языке C++"
+    },
+    {
+      "id": 14,
+      "directionId": 2,
+      "name": "C#",
+      "description": "Разработка приложений на платформе .NET"
+    },
+    {
+      "id": 15,
+      "directionId": 2,
+      "name": "Java",
+      "description": "Объектно-ориентированное программирование на Java"
+    },
+    {
+      "id": 16,
+      "directionId": 2,
+      "name": "Нейросети",
+      "description": "Введение в нейронные сети (после курса Python)"
+    },
+    {
+      "id": 17,
+      "directionId": 2,
+      "name": "Компьютерное зрение",
+      "description": "Обработка изображений и видео (после курса Python)"
+    },
+    {
+      "id": 18,
+      "directionId": 2,
+      "name": ".NET",
+      "description": "Разработка на платформе .NET Framework"
+    },
+    {
+      "id": 19,
+      "directionId": 2,
+      "name": "Системное администрирование",
+      "description": "Настройка и обслуживание компьютерных сетей"
+    },
+    {
+      "id": 20,
+      "directionId": 3,
+      "name": "Цифровая схемотехника",
+      "description": "Логические элементы и микросхемы"
+    }
+  ]
 }
