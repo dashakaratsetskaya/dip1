@@ -89,10 +89,13 @@
     .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
     .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
     .doc-list { list-style: none; }
-    .doc-list li { padding: 12px 8px; border-bottom: 1px solid #f1f3f4; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #3c4043; cursor: pointer; border-radius: 8px; }
+    /* ИЗМЕНЕНО: убран border-bottom, цвет текста #000 */
+    .doc-list li { padding: 12px 8px; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #000; cursor: pointer; border-radius: 8px; }
     .doc-list li:hover { background: #f8f9fa; }
     .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
-    .doc-list .doc-name { flex: 1; line-height: 1.4; }
+    .doc-list .doc-name { flex: 1; line-height: 1.4; color: inherit; }
+    /* ИЗМЕНЕНО: ссылки без подчёркивания и чёрные */
+    .doc-list a { color: #000; text-decoration: none; }
     .doc-list a:hover { text-decoration: none; }
     .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
 
@@ -750,14 +753,8 @@
       });
     });
 
-    // Документы (демо)
-    document.querySelectorAll('.doc-list li').forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const docName = item.querySelector('.doc-name')?.innerText || 'документ';
-        alert(`📄 Открыть документ:\n«${docName}»\n(демонстрационный режим)`);
-      });
-    });
+    // УДАЛЁН блок, показывавший alert при клике на документы.
+    // Теперь ссылки внутри .doc-list li будут работать напрямую.
 
     // ---------- Инициализация приложения ----------
     (async function init() {
