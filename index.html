@@ -89,22 +89,8 @@
     .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
     .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
     .doc-list { list-style: none; }
-
-    /* ИЗМЕНЕНИЕ: гарантированно убираем все границы и линии */
-    .doc-list li,
-    .doc-list li * {
-        padding: 12px 8px;
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        font-size: 15px;
-        color: #000;
-        cursor: pointer;
-        border-radius: 8px;
-        border: none !important;           /* убирает любые границы */
-        border-bottom: none !important;   /* отдельно сбрасывает нижнюю */
-        box-shadow: none !important;      /* на случай, если тень имитирует линию */
-    }
+    /* Убран border-bottom, цвет текста чёрный */
+    .doc-list li { padding: 12px 8px; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #000; cursor: pointer; border-radius: 8px; }
     .doc-list li:hover { background: #f8f9fa; }
     .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
     .doc-list .doc-name { flex: 1; line-height: 1.4; color: inherit; }
@@ -121,20 +107,23 @@
 
     .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
 
-    /* ИЗМЕНЕНИЕ: подвал — жёстко убираем любые намёки на ссылку */
-    .portal-footer,
-    .portal-footer * {
+    /* Подвал — гарантированно без подчёркиваний и эффектов ссылок */
+    .portal-footer {
       margin-top: 40px;
       padding: 16px 24px;
       text-align: center;
       border-top: 1px solid #e0e0e0;
-      color: #5f6368 !important;
+      color: #5f6368;
       font-size: 13px;
       background: #fff;
       text-decoration: none !important;
       cursor: default;
-      pointer-events: none;               /* клик невозможен */
-      outline: none;
+      pointer-events: none; /* убирает возможность клика */
+    }
+    .portal-footer * {
+      text-decoration: none !important;
+      color: inherit;
+      pointer-events: none;
     }
 
     @media (max-width: 900px) {
@@ -232,7 +221,6 @@
               <i class="far fa-file-alt"></i>
               <a href="https://octt.by/wp-content/uploads/2023/06/H12100083_1609966800.pdf">
               <span class="doc-name">Закон о государственных символах</span></li><li data-docname="Закон о защите персональных данных"><i class="far fa-file-alt"></i><span class="doc-name">Закон о защите персональных данных</span></li></ul></div>
-      <!-- остальные секции без изменений, как в предыдущем коде -->
       <div class="docs-section" data-section="2"><div class="docs-section-header"><i class="fas fa-graduation-cap"></i><span>2. Образовательный процесс</span></div><ul class="doc-list"><li data-docname="Изменения в Кодексе с 1 сентября"><i class="far fa-file"></i><span class="doc-name">Изменения в Кодексе с 1 сентября</span></li><li data-docname="Особенности реализации 2025–2026"><i class="far fa-file"></i><span class="doc-name">Особенности реализации 2025–2026</span></li></ul></div>
       <div class="docs-section" data-section="3"><div class="docs-section-header"><i class="fas fa-compass"></i><span>3. Концепции и стратегии</span></div><ul class="doc-list"><li data-docname="Концепция непрерывного воспитания"><i class="far fa-file"></i><span class="doc-name">Концепция непрерывного воспитания</span></li></ul></div>
       <div class="docs-section" data-section="4"><div class="docs-section-header"><i class="fas fa-users"></i><span>4. Государственные программы</span></div><ul class="doc-list"><li data-docname="Программа патриотического воспитания 2022–2025"><i class="far fa-file"></i><span class="doc-name">Программа патриотического воспитания</span></li></ul></div>
