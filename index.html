@@ -9,135 +9,133 @@
     <!-- idb -->
     <script src="https://cdn.jsdelivr.net/npm/idb@7/build/umd.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif; }
-        body { background: #f8f9fa; color: #202124; }
-        .classroom-header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 24px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .header-left { display: flex; align-items: center; gap: 20px; }
-        .logo-area { display: flex; align-items: center; gap: 8px; }
-        .logo-icon { font-size: 28px; color: #1a73e8; }
-        .logo-text { font-size: 22px; font-weight: 400; color: #5f6368; letter-spacing: -0.5px; }
-        .logo-text strong { font-weight: 500; color: #202124; }
-        .main-wrapper { display: flex; max-width: 100%; margin: 0; padding: 24px 0 0 0; gap: 30px; }
-        .sidebar { width: 280px; flex-shrink: 0; margin-left: 24px; }
-        .sidebar-menu { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-        .menu-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; color: #3c4043; font-size: 15px; font-weight: 500; border-bottom: 1px solid #f1f3f4; cursor: pointer; transition: background 0.15s; }
-        .menu-item:last-child { border-bottom: none; }
-        .menu-item i { width: 24px; color: #5f6368; font-size: 18px; }
-        .menu-item.active { background: #e8f0fe; color: #1a73e8; border-left: 4px solid #1a73e8; }
-        .menu-item.active i { color: #1a73e8; }
-        .menu-item:hover:not(.active) { background: #f8f9fa; }
-        .content-area { flex: 1; min-width: 0; padding-right: 24px; }
-        .section-title { font-size: 22px; font-weight: 400; color: #202124; margin-bottom: 20px; display: flex; align-items: center; }
-        .section-title i { color: #1a73e8; margin-right: 12px; font-size: 24px; }
-        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-        .search-wrapper { display: flex; align-items: center; background: white; border: 1px solid #dadce0; border-radius: 24px; padding: 8px 16px; width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-        .search-wrapper i { color: #5f6368; margin-right: 12px; font-size: 16px; }
-        .search-wrapper input { border: none; outline: none; font-size: 15px; width: 100%; background: transparent; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif; }
+    body { background: #f8f9fa; color: #202124; }
+    .classroom-header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 24px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .logo-area { display: flex; align-items: center; gap: 8px; }
+    .logo-icon { font-size: 28px; color: #1a73e8; }
+    .logo-text { font-size: 22px; font-weight: 400; color: #5f6368; letter-spacing: -0.5px; }
+    .logo-text strong { font-weight: 500; color: #202124; }
+    .main-wrapper { display: flex; max-width: 100%; margin: 0; padding: 24px 0 0 0; gap: 30px; }
+    .sidebar { width: 280px; flex-shrink: 0; margin-left: 24px; }
+    .sidebar-menu { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .menu-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; color: #3c4043; font-size: 15px; font-weight: 500; border-bottom: 1px solid #f1f3f4; cursor: pointer; transition: background 0.15s; }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item i { width: 24px; color: #5f6368; font-size: 18px; }
+    .menu-item.active { background: #e8f0fe; color: #1a73e8; border-left: 4px solid #1a73e8; }
+    .menu-item.active i { color: #1a73e8; }
+    .menu-item:hover:not(.active) { background: #f8f9fa; }
+    .content-area { flex: 1; min-width: 0; padding-right: 24px; }
+    .section-title { font-size: 22px; font-weight: 400; color: #202124; margin-bottom: 20px; display: flex; align-items: center; }
+    .section-title i { color: #1a73e8; margin-right: 12px; font-size: 24px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .search-wrapper { display: flex; align-items: center; background: white; border: 1px solid #dadce0; border-radius: 24px; padding: 8px 16px; width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .search-wrapper i { color: #5f6368; margin-right: 12px; font-size: 16px; }
+    .search-wrapper input { border: none; outline: none; font-size: 15px; width: 100%; background: transparent; }
 
-        .direction-grid, .program-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: flex-start; }
-        .direction-card, .program-card { flex: 0 0 280px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #e8eaed; transition: box-shadow 0.2s, transform 0.1s; cursor: pointer; }
-        .direction-card:hover, .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
-        .card-banner { height: 90px; background-size: cover; }
-        .banner-blue { background: #1a73e8; } .banner-green { background: #129eaf; } .banner-purple { background: #9334e6; } .banner-orange { background: #e8710a; } .banner-red { background: #c5221f; } .banner-teal { background: #007b83; } .banner-amber { background: #b65700; } .banner-lightblue { background: #4285f4; } .banner-indigo { background: #3f51b5; }
-        .card-content { padding: 18px 16px 16px; }
-        .card-title { font-size: 18px; font-weight: 500; color: #202124; margin-bottom: 6px; }
-        .card-description { font-size: 13px; color: #5f6368; line-height: 1.4; }
+    .direction-grid, .program-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: flex-start; }
+    .direction-card, .program-card { flex: 0 0 280px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #e8eaed; transition: box-shadow 0.2s, transform 0.1s; cursor: pointer; }
+    .direction-card:hover, .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .card-banner { height: 90px; background-size: cover; }
+    .banner-blue { background: #1a73e8; } .banner-green { background: #129eaf; } .banner-purple { background: #9334e6; } .banner-orange { background: #e8710a; } .banner-red { background: #c5221f; } .banner-teal { background: #007b83; } .banner-amber { background: #b65700; } .banner-lightblue { background: #4285f4; } .banner-indigo { background: #3f51b5; }
+    .card-content { padding: 18px 16px 16px; }
+    .card-title { font-size: 18px; font-weight: 500; color: #202124; margin-bottom: 6px; }
+    .card-description { font-size: 13px; color: #5f6368; line-height: 1.4; }
 
-        .programs-container, .program-detail-container { display: none; margin-top: 8px; }
-        .back-link { display: inline-flex; align-items: center; gap: 8px; color: #1a73e8; font-weight: 500; margin-bottom: 16px; cursor: pointer; }
-        .back-link i { font-size: 16px; }
-        .detail-header { margin-bottom: 24px; }
-        .detail-title { font-size: 28px; font-weight: 400; }
-        .detail-description { color: #5f6368; margin-top: 4px; }
+    .programs-container, .program-detail-container { display: none; margin-top: 8px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: #1a73e8; font-weight: 500; margin-bottom: 16px; cursor: pointer; }
+    .back-link i { font-size: 16px; }
+    .detail-header { margin-bottom: 24px; }
+    .detail-title { font-size: 28px; font-weight: 400; }
+    .detail-description { color: #5f6368; margin-top: 4px; }
 
-        .materials-tabs { display: flex; border-bottom: 1px solid #e0e0e0; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab-btn { padding: 12px 20px; background: none; border: none; font-size: 15px; font-weight: 500; color: #5f6368; cursor: pointer; border-bottom: 3px solid transparent; }
-        .tab-btn.active { color: #1a73e8; border-bottom-color: #1a73e8; }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+    .materials-tabs { display: flex; border-bottom: 1px solid #e0e0e0; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 12px 20px; background: none; border: none; font-size: 15px; font-weight: 500; color: #5f6368; cursor: pointer; border-bottom: 3px solid transparent; }
+    .tab-btn.active { color: #1a73e8; border-bottom-color: #1a73e8; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
 
-        .material-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-        .add-buttons { display: flex; gap: 10px; }
-        .add-file-btn { background: #1a73e8; color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
-        .add-file-btn:hover { background: #1557b0; }
-        .add-link-btn { background: white; color: #1a73e8; border: 1px solid #dadce0; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
-        .add-link-btn:hover { background: #f1f3f4; }
-        .file-input { display: none; }
+    .material-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .add-buttons { display: flex; gap: 10px; }
+    .add-file-btn { background: #1a73e8; color: white; border: none; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
+    .add-file-btn:hover { background: #1557b0; }
+    .add-link-btn { background: white; color: #1a73e8; border: 1px solid #dadce0; border-radius: 20px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
+    .add-link-btn:hover { background: #f1f3f4; }
+    .file-input { display: none; }
 
-        .material-list { list-style: none; }
-        .material-list li { padding: 12px 8px; border-bottom: 1px solid #f1f3f4; display: flex; align-items: center; gap: 12px; border-radius: 8px; }
-        .material-list li:hover { background: #f8f9fa; }
-        .material-list li i:first-child { width: 24px; color: #5f6368; }
-        .material-list li .file-info { flex: 1; display: flex; flex-direction: column; }
-        .file-name { font-weight: 500; color: #202124; }
-        .file-meta { font-size: 12px; color: #5f6368; display: flex; gap: 12px; margin-top: 2px; }
-        .file-actions { display: flex; gap: 8px; }
-        .file-actions i { cursor: pointer; padding: 6px; border-radius: 50%; color: #5f6368; transition: background 0.2s; }
-        .file-actions i:hover { background: #e8eaed; }
+    .material-list { list-style: none; }
+    .material-list li { padding: 12px 8px; border-bottom: 1px solid #f1f3f4; display: flex; align-items: center; gap: 12px; border-radius: 8px; }
+    .material-list li:hover { background: #f8f9fa; }
+    .material-list li i:first-child { width: 24px; color: #5f6368; }
+    .material-list li .file-info { flex: 1; display: flex; flex-direction: column; }
+    .file-name { font-weight: 500; color: #202124; }
+    .file-meta { font-size: 12px; color: #5f6368; display: flex; gap: 12px; margin-top: 2px; }
+    .file-actions { display: flex; gap: 8px; }
+    .file-actions i { cursor: pointer; padding: 6px; border-radius: 50%; color: #5f6368; transition: background 0.2s; }
+    .file-actions i:hover { background: #e8eaed; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
-        .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 16px; max-width: 90%; max-height: 90%; overflow: auto; padding: 20px; position: relative; }
-        .modal-content.video-mode { width: 90%; max-width: 1200px; }
-        .modal-close { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #5f6368; }
-        .modal-body { margin-top: 10px; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; border-radius: 16px; max-width: 90%; max-height: 90%; overflow: auto; padding: 20px; position: relative; }
+    .modal-content.video-mode { width: 90%; max-width: 1200px; }
+    .modal-close { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #5f6368; }
+    .modal-body { margin-top: 10px; }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .docs-container { display: none; background: transparent; margin-top: 8px; }
-        .docs-section { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; padding: 20px 24px; margin-bottom: 24px; }
-        .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
-        .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
-        .doc-list { list-style: none; }
-        .doc-list li { padding: 12px 8px; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #000; cursor: pointer; border-radius: 8px; }
-        .doc-list li:hover { background: #f8f9fa; }
-        .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
-        .doc-list .doc-name { flex: 1; line-height: 1.4; color: inherit; }
-        .doc-list a, .doc-list a:link, .doc-list a:visited, .doc-list a:hover, .doc-list a:active { text-decoration: none !important; color: #000; }
-        .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
+    .docs-container { display: none; background: transparent; margin-top: 8px; }
+    .docs-section { background: #fff; border-radius: 16px; border: 1px solid #e0e0e0; padding: 20px 24px; margin-bottom: 24px; }
+    .docs-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-weight: 500; font-size: 20px; color: #202124; border-bottom: 2px solid #e8f0fe; padding-bottom: 12px; }
+    .docs-section-header i { width: 28px; color: #1a73e8; font-size: 22px; }
+    .doc-list { list-style: none; }
+    .doc-list li { padding: 12px 8px; display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #000; cursor: pointer; border-radius: 8px; }
+    .doc-list li:hover { background: #f8f9fa; }
+    .doc-list li i { color: #5f6368; font-size: 16px; margin-top: 2px; width: 20px; }
+    .doc-list .doc-name { flex: 1; line-height: 1.4; color: inherit; }
+    .doc-list a, .doc-list a:link, .doc-list a:visited, .doc-list a:hover, .doc-list a:active { text-decoration: none !important; color: #000; }
+    .badge-new { background: #e8f0fe; color: #1a73e8; font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 16px; margin-left: 8px; white-space: nowrap; }
 
-        /* Конкурсы */
-        .contests-year-block { margin-bottom: 30px; }
-        .contests-year-title { font-size: 24px; font-weight: 400; color: #1a73e8; margin-bottom: 16px; padding-left: 16px; border-left: 5px solid #1a73e8; }
-        .contests-month-block { margin-bottom: 24px; margin-left: 20px; }
-        .contests-month-title { font-size: 18px; font-weight: 500; color: #202124; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .contests-month-title i { color: #1a73e8; font-size: 18px; }
-        .contest-item { background: #fff; border-radius: 12px; border: 1px solid #e8eaed; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; transition: box-shadow 0.2s; }
-        .contest-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .contest-item-name { font-weight: 500; color: #202124; flex: 1 1 250px; }
-        .contest-item-links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .contest-link { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #e8f0fe; color: #1a73e8; border-radius: 20px; font-size: 13px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
-        .contest-link:hover { background: #d2e3fc; }
-        .contest-link i { font-size: 14px; }
+    /* Конкурсы */
+    .contests-year-block { margin-bottom: 30px; }
+    .contests-year-title { font-size: 24px; font-weight: 400; color: #1a73e8; margin-bottom: 16px; padding-left: 16px; border-left: 5px solid #1a73e8; }
+    .contests-month-block { margin-bottom: 24px; margin-left: 20px; }
+    .contests-month-title { font-size: 18px; font-weight: 500; color: #202124; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .contests-month-title i { color: #1a73e8; font-size: 18px; }
+    .contest-item { background: #fff; border-radius: 12px; border: 1px solid #e8eaed; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; transition: box-shadow 0.2s; }
+    .contest-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .contest-item-name { font-weight: 500; color: #202124; flex: 1 1 250px; }
+    .contest-item-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .contest-link { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #e8f0fe; color: #1a73e8; border-radius: 20px; font-size: 13px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
+    .contest-link:hover { background: #d2e3fc; }
+    .contest-link i { font-size: 14px; }
 
-        /* Поддержка: FAQ */
-        .faq-list { list-style: none; }
-        .faq-list li { border-bottom: 1px solid #f1f3f4; padding: 14px 8px; cursor: pointer; }
-        .faq-list li:last-child { border-bottom: none; }
-        .faq-question { font-weight: 500; color: #202124; display: flex; align-items: center; gap: 10px; }
-        .faq-question i { color: #1a73e8; font-size: 14px; transition: transform 0.2s; }
-        .faq-answer { font-size: 14px; color: #5f6368; margin-top: 8px; padding-left: 28px; display: none; line-height: 1.5; }
-        .faq-list li.open .faq-answer { display: block; }
-        .faq-list li.open .faq-question i { transform: rotate(90deg); }
+    /* Поддержка: FAQ */
+    .faq-list { list-style: none; }
+    .faq-list li { border-bottom: 1px solid #f1f3f4; padding: 14px 8px; cursor: pointer; }
+    .faq-list li:last-child { border-bottom: none; }
+    .faq-question { font-weight: 500; color: #202124; display: flex; align-items: center; gap: 10px; }
+    .faq-question i { color: #1a73e8; font-size: 14px; transition: transform 0.2s; }
+    .faq-answer { font-size: 14px; color: #5f6368; margin-top: 8px; padding-left: 28px; display: none; line-height: 1.5; }
+    .faq-list li.open .faq-answer { display: block; }
+    .faq-list li.open .faq-question i { transform: rotate(90deg); }
 
-        /* Контакты */
-        .contact-cards { display: flex; flex-wrap: wrap; gap: 20px; }
-        .contact-card { flex: 1 1 220px; display: flex; align-items: center; gap: 16px; background: #f8f9fa; border-radius: 12px; padding: 18px 20px; border: 1px solid #e8eaed; }
-        .contact-card i { font-size: 28px; color: #1a73e8; width: 36px; text-align: center; }
-        .contact-info { display: flex; flex-direction: column; }
-        .contact-info strong { font-size: 14px; color: #202124; }
-        .contact-info span { font-size: 14px; color: #5f6368; }
+    /* Контакты */
+    .contact-cards { display: flex; flex-wrap: wrap; gap: 20px; }
+    .contact-card { flex: 1 1 220px; display: flex; align-items: center; gap: 16px; background: #f8f9fa; border-radius: 12px; padding: 18px 20px; border: 1px solid #e8eaed; }
+    .contact-card i { font-size: 28px; color: #1a73e8; width: 36px; text-align: center; }
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-info strong { font-size: 14px; color: #202124; }
+    .contact-info span { font-size: 14px; color: #5f6368; }
 
-        .portal-footer { margin-top: 40px; padding: 16px 24px; text-align: center; border-top: 1px solid #e0e0e0; color: #5f6368; font-size: 13px; background: #fff; }
-
-        @media (max-width: 900px) {
-            .main-wrapper { flex-direction: column; padding-left: 0; }
-            .sidebar { width: 100%; margin-left: 0; padding: 0 16px; }
-            .content-area { padding-left: 16px; padding-right: 16px; }
-            .toolbar { flex-direction: column; align-items: stretch; gap: 12px; }
-            .search-wrapper { width: 100%; }
-            .direction-card, .program-card { flex: 0 0 260px; }
-        }
+    @media (max-width: 900px) {
+      .main-wrapper { flex-direction: column; padding-left: 0; }
+      .sidebar { width: 100%; margin-left: 0; padding: 0 16px; }
+      .content-area { padding-left: 16px; padding-right: 16px; }
+      .toolbar { flex-direction: column; align-items: stretch; gap: 12px; }
+      .search-wrapper { width: 100%; }
+      .direction-card, .program-card { flex: 0 0 260px; }
+    }
     </style>
 </head>
 <body>
@@ -152,497 +150,797 @@
 </header>
 
 <div class="main-wrapper">
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-menu">
-            <div class="menu-item active" data-view="courses"><i class="fas fa-book-open"></i><span>Курсы</span></div>
-            <div class="menu-item" data-view="contests"><i class="fas fa-trophy"></i><span>Конкурсы</span></div>
-            <div class="menu-item" data-view="docs"><i class="fas fa-file-alt"></i><span>Нормативные документы</span></div>
-            <div class="menu-item" data-view="support"><i class="fas fa-headset"></i><span>Поддержка</span></div>
-        </div>
-    </aside>
-
-    <main class="content-area">
-        <div id="coursesHeader">
-            <div class="section-title"><i class="fas fa-th-large"></i> Направления обучения</div>
-            <div class="toolbar">
-                <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" placeholder="Поиск по направлениям..." id="directionSearch"></div>
-            </div>
-        </div>
-
-        <div class="direction-grid" id="directionGrid"></div>
-
-        <div class="programs-container" id="programsView">
-            <div class="back-link" id="backToDirections"><i class="fas fa-arrow-left"></i> Все направления</div>
-            <div class="section-title" id="programsTitle"><i class="fas fa-layer-group"></i> <span id="directionNameLabel">Программы</span></div>
-            <div class="program-grid" id="programGrid"></div>
-        </div>
-
-        <div class="program-detail-container" id="programDetailView">
-            <div class="back-link" id="backToPrograms"><i class="fas fa-arrow-left"></i> К списку программ</div>
-            <div class="detail-header">
-                <div class="detail-title" id="programDetailTitle">Название программы</div>
-                <div class="detail-description" id="programDetailDesc">Описание программы</div>
-            </div>
-            <div class="materials-tabs">
-                <button class="tab-btn active" data-tab="syllabus">Программа курса</button>
-                <button class="tab-btn" data-tab="materials">Материалы</button>
-                <button class="tab-btn" data-tab="presentations">Презентации</button>
-                <button class="tab-btn" data-tab="masterclasses">Мастер-классы</button>
-                <button class="tab-btn" data-tab="videos">Видеолекции</button>
-            </div>
-            <div class="tab-pane active" id="tab-syllabus">
-                <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputSyllabus" class="file-input" multiple><button class="add-file-btn" data-target="syllabus"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
-                <ul class="material-list" id="syllabusList"></ul>
-            </div>
-            <div class="tab-pane" id="tab-materials">
-                <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMaterials" class="file-input" multiple><button class="add-file-btn" data-target="materials"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
-                <ul class="material-list" id="materialsList"></ul>
-            </div>
-            <div class="tab-pane" id="tab-presentations">
-                <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputPresentations" class="file-input" multiple><button class="add-file-btn" data-target="presentations"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
-                <ul class="material-list" id="presentationsList"></ul>
-            </div>
-            <div class="tab-pane" id="tab-masterclasses">
-                <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMasterclasses" class="file-input" multiple><button class="add-file-btn" data-target="masterclasses"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="masterclasses"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
-                <ul class="material-list" id="masterclassesList"></ul>
-            </div>
-            <div class="tab-pane" id="tab-videos">
-                <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputVideos" class="file-input" multiple><button class="add-file-btn" data-target="videos"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="videos"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
-                <ul class="material-list" id="videosList"></ul>
-            </div>
-        </div>
-
-        <!-- НОРМАТИВНЫЕ ДОКУМЕНТЫ -->
-        <div class="docs-container" id="docsContainer">
-            <!-- содержание документов без изменений -->
-            <div class="docs-section" data-section="1"><div class="docs-section-header"><i class="fas fa-gavel"></i><span>1. Законодательные акты</span></div><ul class="doc-list"><li data-docname="Закон об изменении Кодекса об образовании"><i class="far fa-file-pdf"></i><a href="https://octt.by/wp-content/uploads/2024/08/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D1%80%D0%B1-%D0%BE%D0%B1-%D0%B8%D0%B7%D0%BC-%D0%BA%D0%BE%D0%B4%D0%B5%D0%BA%D1%81%D0%B0.pdf" target="_blank"><span class="doc-name">Закон Республики Беларусь «Об изменении Кодекса Республики Беларусь об образовании»</span></a><span class="badge-new">новое</span></li><li data-docname="Закон о государственных символах"><i class="far fa-file-alt"></i><a href="https://octt.by/wp-content/uploads/2023/06/H12100083_1609966800.pdf"><span class="doc-name">Закон Республики Беларусь «Об изменении Закона Республики Беларусь «О государственных символах Республики Беларусь»</span></a></li><li data-docname="Закон о защите персональных данных"><i class="far fa-file-alt"></i><a href="https://octt.by/wp-content/uploads/2024/08/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D1%80%D0%B1-%D0%BE-%D0%BF%D0%B5%D1%80%D1%81-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85.pdf"><span class="doc-name">Закон Республики Беларусь «О защите персональных данных»</span></a></li></ul></div>
-            <!-- ... остальные разделы документов сохранены полностью -->
-        </div>
-
-        <!-- КОНКУРСЫ -->
-        <div class="content-block" id="contestsContainer" style="display:none;">
-            <div class="section-title"><i class="fas fa-trophy"></i> Положения конкурсов</div>
-            <!-- содержимое конкурсов без изменений -->
-        </div>
-
-        <!-- ПОДДЕРЖКА -->
-        <div class="content-block" id="supportContainer" style="display:none;">
-            <div class="section-title"><i class="fas fa-headset"></i> Поддержка</div>
-            <!-- содержимое поддержки без изменений -->
-        </div>
-    </main>
-</div>
-
-<!-- Модальное окно предпросмотра -->
-<div class="modal" id="previewModal">
-    <div class="modal-content">
-        <span class="modal-close" id="modalClose">&times;</span>
-        <div class="modal-body" id="modalBody"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-menu">
+      <div class="menu-item active" data-view="courses"><i class="fas fa-book-open"></i><span>Курсы</span></div>
+      <div class="menu-item" data-view="contests"><i class="fas fa-trophy"></i><span>Конкурсы</span></div>
+      <div class="menu-item" data-view="docs"><i class="fas fa-file-alt"></i><span>Нормативные документы</span></div>
+      <div class="menu-item" data-view="support"><i class="fas fa-headset"></i><span>Поддержка</span></div>
     </div>
+  </aside>
+
+  <main class="content-area">
+    <div id="coursesHeader">
+      <div class="section-title"><i class="fas fa-th-large"></i> Направления обучения</div>
+      <div class="toolbar">
+        <div class="search-wrapper"><i class="fas fa-search"></i><input type="text" placeholder="Поиск по направлениям..." id="directionSearch"></div>
+      </div>
+    </div>
+
+    <div class="direction-grid" id="directionGrid"></div>
+
+    <div class="programs-container" id="programsView">
+      <div class="back-link" id="backToDirections"><i class="fas fa-arrow-left"></i> Все направления</div>
+      <div class="section-title" id="programsTitle"><i class="fas fa-layer-group"></i> <span id="directionNameLabel">Программы</span></div>
+      <div class="program-grid" id="programGrid"></div>
+    </div>
+
+    <div class="program-detail-container" id="programDetailView">
+      <div class="back-link" id="backToPrograms"><i class="fas fa-arrow-left"></i> К списку программ</div>
+      <div class="detail-header">
+        <div class="detail-title" id="programDetailTitle">Название программы</div>
+        <div class="detail-description" id="programDetailDesc">Описание программы</div>
+      </div>
+      <div class="materials-tabs">
+        <button class="tab-btn active" data-tab="syllabus">Программа курса</button>
+        <button class="tab-btn" data-tab="materials">Материалы</button>
+        <button class="tab-btn" data-tab="presentations">Презентации</button>
+        <button class="tab-btn" data-tab="masterclasses">Мастер-классы</button>
+        <button class="tab-btn" data-tab="videos">Видеолекции</button>
+      </div>
+      <div class="tab-pane active" id="tab-syllabus">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputSyllabus" class="file-input" multiple><button class="add-file-btn" data-target="syllabus"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="syllabusList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-materials">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMaterials" class="file-input" multiple><button class="add-file-btn" data-target="materials"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="materialsList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-presentations">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputPresentations" class="file-input" multiple><button class="add-file-btn" data-target="presentations"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button></div></div>
+        <ul class="material-list" id="presentationsList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-masterclasses">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputMasterclasses" class="file-input" multiple><button class="add-file-btn" data-target="masterclasses"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="masterclasses"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
+        <ul class="material-list" id="masterclassesList"></ul>
+      </div>
+      <div class="tab-pane" id="tab-videos">
+        <div class="material-header"><span></span><div class="add-buttons"><input type="file" id="fileInputVideos" class="file-input" multiple><button class="add-file-btn" data-target="videos"><i class="fas fa-cloud-upload-alt"></i> Загрузить файлы</button><button class="add-link-btn" data-target="videos"><i class="fas fa-link"></i> Добавить ссылку</button></div></div>
+        <ul class="material-list" id="videosList"></ul>
+      </div>
+    </div>
+
+    <!-- НОРМАТИВНЫЕ ДОКУМЕНТЫ -->
+    <div class="docs-container" id="docsContainer">
+      <div class="docs-section" data-section="1"><div class="docs-section-header"><i class="fas fa-gavel"></i><span>1. Законодательные акты</span></div><ul class="doc-list">
+          <li data-docname="Закон об изменении Кодекса об образовании"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2024/08/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D1%80%D0%B1-%D0%BE%D0%B1-%D0%B8%D0%B7%D0%BC-%D0%BA%D0%BE%D0%B4%D0%B5%D0%BA%D1%81%D0%B0.pdf" target="_blank"><span class="doc-name">Закон Республики Беларусь «Об изменении Кодекса Республики Беларусь об образовании»</span></a><span class="badge-new">новое</span></li>
+          <li data-docname="Закон о государственных символах"><i class="far fa-file-alt"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/H12100083_1609966800.pdf"><span class="doc-name">Закон Республики Беларусь «Об изменении Закона Республики Беларусь «О государственных символах Республики Беларусь»</span></a></li>
+          <li data-docname="Закон о защите персональных данных"><i class="far fa-file-alt"></i>
+              <a href="https://octt.by/wp-content/uploads/2024/08/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D1%80%D0%B1-%D0%BE-%D0%BF%D0%B5%D1%80%D1%81-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85.pdf"><span class="doc-name">Закон Республики Беларусь «О защите персональных данных»</span></a></li></ul></div>
+        
+      <div class="docs-section" data-section="2"><div class="docs-section-header"><i class="fas fa-graduation-cap"></i><span>2. Образовательный процесс</span></div><ul class="doc-list">
+          <li data-docname="Изменения в Кодексе с 1 сентября"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2025/09/%D0%98%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D0%9A%D0%BE%D0%B4%D0%B5%D0%BA%D1%81-%D1%81-1-%D1%81%D0%B5%D0%BD%D1%82%D1%8F%D0%B1%D1%80%D1%8F.pdf" target="_blank"><span class="doc-name">Изменения в Кодексе с 1 сентября</span></a></li>
+          <li data-docname="Особенности реализации образовательной программы 2025–2026"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2025/09/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8-25-26.pdf"><span class="doc-name">Особенности реализации образовательной программы 2025–2026</span></a></li>
+          <li data-docname="Постановление Министерства образования"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2024/08/%D0%BE-%D1%82%D0%B8%D0%BF%D0%BE%D0%B2%D1%8B%D1%85-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%D1%85.pdf"><span class="doc-name">Постановление Министерства образования Республики Беларусь 20 октября 2023 г. №325 (о типовых программах дополнительного образования детей и молодежи)</span></a></li>
+          <li data-docname="25 июля 2011 г. №149"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2024/08/%D0%9E%D0%B1-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B8-%D0%BF%D0%BE%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-25.07.11-%E2%84%96149.pdf"><span class="doc-name">Об изменении постановления Министерства образования Республики Беларусь от 25 июля 2011 г. №149</span></a></li></ul>
+      </div>
+
+      <div class="docs-section" data-section="3"><div class="docs-section-header"><i class="fas fa-compass"></i><span>3. Концепции и стратегии</span></div><ul class="doc-list">
+          <li data-docname="Концепция развития системы образования"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/koncep-razv-sist-obrazov.pdf"><span class="doc-name">Концепция развития системы образования Республики Беларусь до 2030 года</span></a></li>
+          <li data-docname="Концепция цифровой трансформации процессов"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/concept.pdf"><span class="doc-name">Концепция цифровой трансформации процессов в системе образования (2019–2025)</span></a></li>
+          <li data-docname="Стратегия «Наука и технологии: 2018–2040»"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/strategy_2018-2040.pdf"><span class="doc-name">Стратегия «Наука и технологии: 2018–2040»</span></a></li>
+          <li data-docname="Постановление Совета Министров №349"><i class="far fa-file-pdf"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/C22100349_1624395600.pdf"><span class="doc-name">Постановление Совета Министров №349 (Стратегия молодежной политики до 2030 года)</span></a></li></ul></div>
+
+      <div class="docs-section" data-section="4"><div class="docs-section-header"><i class="fas fa-users"></i><span>4. Государственные программы</span></div><ul class="doc-list">
+          <li data-docname="Программа патриотического воспитания населения (2022–2025)"><i class="far fa-file"></i>
+              <a href="https://pravo.by/document/?guid=12551&p0=C22100773&p1=1"><span class="doc-name">Программа патриотического воспитания населения (2022–2025)</span></a></li>
+          <li data-docname="Программа непрерывного воспитания детей и молодежи (2021–2025)"><i class="far fa-file"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/programma-vospitaniya-2021-2025.pdf"><span class="doc-name">Программа непрерывного воспитания детей и молодежи (2021–2025)</span></a></li></ul></div>
+      
+      <div class="docs-section" data-section="5"><div class="docs-section-header"><i class="fas fa-flask"></i><span>5. Научная и инновационная деятельность</span></div><ul class="doc-list">
+          <li data-docname="Указ Президента №156"><i class="far fa-file"></i>
+              <a href="https://pravo.by/document/?guid=12551&p0=P32000156&p1=1"><span class="doc-name">Указ Президента №156 (о приоритетных направлениях научной и инновационной деятельности на 2021–2025 годы)</span></a></li>
+          <li data-docname="Инструкция об экспериментальной"><i class="far fa-file"></i>
+              <a href="https://pravo.by/document/?guid=3871&p0=W21124371"><span class="doc-name">Инструкция об экспериментальной и инновационной деятельности (№276, 2022)</span></a></li></ul></div>
+      
+      <div class="docs-section" data-section="6"><div class="docs-section-header"><i class="fas fa-school"></i><span>6. Организация деятельности</span></div><ul class="doc-list">
+          <li data-docname="Положение о педагогическом совете"><i class="far fa-file"></i>
+              <a href="https://pravo.by/document/?guid=12551&p0=W22238790&p1=1"><span class="doc-name">Положение о педагогическом совете учреждения дополнительного образования (№310, 2022)</span></a></li>
+          <li data-docname="Правила педагогических работников"><i class="far fa-file"></i>
+              <a href="https://octt.by/wp-content/uploads/2023/06/%D0%9F%D1%80%D0%B8%D0%BA%D0%B0%D0%B7401_10_06-_%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D0%BF%D0%B5%D0%B4_%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.pdf"><span class="doc-name">Правила педагогических работников</span></a></li></ul></div>
+
+      <div class="docs-section" data-section="7"><div class="docs-section-header"><i class="fas fa-shield-alt"></i><span>7. Безопасность</span></div><ul class="doc-list">
+          <li data-docname="Правила безопасности"><i class="far fa-file"></i>
+              <a href="https://octt.by/wp-content/uploads/2025/09/%D0%9F%D0%BE%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%E2%84%96136-%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D1%8B.pdf"><span class="doc-name">Об утверждении правил безопасности, расследования и учета несчастных случаев с обучающимися</span></a></li></ul></div>
+      
+      <div class="docs-section" data-section="8"><div class="docs-section-header"><i class="fas fa-calendar-alt"></i><span>8. Мероприятия</span></div><ul class="doc-list">
+          <li data-docname="Перечень мероприятий"><i class="far fa-file"></i>
+              <a href="https://octt.by/wp-content/uploads/2025/09/%D0%9F%D0%BE%D1%81%D1%82.%E2%84%9625-%D0%BF%D0%B5%D1%80%D0%B5%D1%87%D0%B5%D0%BD%D1%8C-%D1%80%D0%B5%D1%81%D0%BF.%D0%BC%D0%B5%D1%80%D0%BE%D0%BF%D1%80.pdf"><span class="doc-name">О перечне международных и республиканских мероприятий</span></a></li></ul></div>
+    </div>
+
+    <!-- КОНКУРСЫ -->
+    <div class="content-block" id="contestsContainer" style="display:none;">
+      <div class="section-title"><i class="fas fa-trophy"></i> Положения конкурсов</div>
+
+      <!-- 2025–2026 -->
+      <div class="contests-year-block">
+        <h2 class="contests-year-title">2025–2026 учебный год</h2>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Сентябрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Конкурс научно-технического творчества учащихся Союзного государства «Таланты XXI века»</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Октябрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс компьютерных разработок патриотической направленности «Патриот.Бай»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/konkurs-kompyuternyx-razrabotok-patrioticheskoj-napravlennosti-patriot-by-2.html#respond" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Страница конкурса</a>
+              <a href="https://octt.by/wp-content/uploads/2025/09/ПроектПатриотОбласть.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной этап республиканского конкурса «ТехноЕлка»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/wp-content/uploads/2025/09/Проект-Приказа-ТехноЕлка-2025.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной этап Республиканского конкурса научно-технических проектов «ПроТехно»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/wp-content/uploads/2025/10/Обл.Проект-Положения-ПроТехно.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Ноябрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский конкурс компьютерных разработок патриотической направленности «Патриот.Бай»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский конкурс научно-технических проектов учащихся инженерно-технических центров</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Декабрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной онлайн-конкурс компьютерных графических рисунков «Дизайн против киберугроз»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/priglashaem-prinyat-uchastie-v-onlajn-konkurse-kompyuternyx-graficheskix-risunkov-dizajn-protiv-kiberugroz.html" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Страница конкурса</a>
+              <a href="https://octt.by/wp-content/uploads/2025/10/ПоложениеДизайнПротивКиберУгроз.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Январь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс научно-технического творчества учащихся «ТехноИнтеллект»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/wp-content/uploads/2024/12/проект-положения-25.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Февраль</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Конкурс по электронике «E-PRACTIC»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/wp-content/uploads/2025/12/проект-положения-E-practic-26.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс по программированию «OpenITWorld»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областные этапы республиканского конкурса «Инженеры будущего»</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Март</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский смотр инновационного и технического творчества</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканская спартакиада по техническим видам спорта «ТехноСпорт»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по трассовому моделизму</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский конкурс научно-технического творчества учащихся «ТехноИнтеллект»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский конкурс технического творчества учащейся молодежи «Инженеры будущего»</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Апрель</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс «И пусть поколения помнят…», посвященный Дню Победы</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной этап творческого конкурса для детей и подростков «Соблюдаем законы дорог»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областные соревнования по мотоциклетному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по картингу (1, 2 этапы)</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс рисунков и плакатов по электро-теплобезопасности</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/wp-content/uploads/2024/04/Положение-конкурса-рисунков-Электро-теплобезопасность-и-безопасность-при-пользовании-газом-в-быту-глазами-детей-2024.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс компьютерных игровых проектов «Детям безопасный интернет»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной турнир по робототехнике «ROBOQUEST»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс «ROBOATRIUM»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканский турнир по робототехнике</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Май</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по автомодельному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по мотоциклетному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной слет отрядов юных инспекторов дорожного движения</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Слет инженерных классов «Индустрия 4.0»</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной форум выпускников дистанционной Школы точных наук</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Июнь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областные соревнования по судомодельному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по судомодельному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Республиканские соревнования по авиамодельному спорту</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областная летняя техноакция</span>
+          </div>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной слет юных спасателей пожарных</span>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Июль-Август</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Летний клуб «Клевер»</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="contests-year-block">
+        <h2 class="contests-year-title">2024</h2>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Октябрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной этап республиканского конкурса «ТехноЕлка»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/oblastnoj-etap-respublikanskogo-konkursa-texnoelka-3.html#respond" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Страница конкурса</a>
+            </div>
+          </div>
+        </div>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Декабрь</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Областной конкурс компьютерных разработок «TimeLime «Город. Улица. Война – Мир. Развитие. Страна»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/oblastnoj-konkurs-kompyuternyx-razrabotok-timelime-gorod-ulica-vojna-mir-razvitie-strana.html" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Страница конкурса</a>
+              <a href="https://octt.by/wp-content/uploads/2024/12/ПОЛОЖЕНИЕ-Кораблик-надежды.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2026 -->
+      <div class="contests-year-block">
+        <h2 class="contests-year-title">2026</h2>
+        <div class="contests-month-block">
+          <h3 class="contests-month-title"><i class="far fa-calendar-alt"></i> Март-Апрель</h3>
+          <div class="contest-item">
+            <span class="contest-item-name">Отборочный областной этап на республиканский IT-конкурс «РобИн-2026»</span>
+            <div class="contest-item-links">
+              <a href="https://octt.by/otborochnyj-oblastnoj-etap-na-respublikanskij-it-konkurs-robin-2026.html" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Страница конкурса</a>
+              <a href="https://octt.by/wp-content/uploads/2026/02/РОБИН-2026.pdf" target="_blank" class="contest-link"><i class="fas fa-file-pdf"></i> Положение и Регламент</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПОДДЕРЖКА -->
+    <div class="content-block" id="supportContainer" style="display:none;">
+      <div class="section-title"><i class="fas fa-headset"></i> Поддержка</div>
+      <div class="docs-section">
+        <div class="docs-section-header"><i class="fas fa-question-circle"></i><span>Часто задаваемые вопросы</span></div>
+        <ul class="faq-list">
+          <li>
+            <div class="faq-question"><i class="fas fa-chevron-right"></i> Как загрузить файл в программу обучения?</div>
+            <div class="faq-answer">Перейдите в нужное направление → программа → вкладка «Материалы» (или другая) и нажмите «Загрузить файлы». Файлы сохраняются локально в вашем браузере.</div>
+          </li>
+          <li>
+            <div class="faq-question"><i class="fas fa-chevron-right"></i> Могу ли я добавить ссылку на видео?</div>
+            <div class="faq-answer">Да, во вкладках «Мастер-классы» и «Видеолекции» есть кнопка «Добавить ссылку». Поддерживаются YouTube, Vimeo и прямые ссылки на видеофайлы.</div>
+          </li>
+          <li>
+            <div class="faq-question"><i class="fas fa-chevron-right"></i> Где хранятся загруженные файлы?</div>
+            <div class="faq-answer">Все файлы и ссылки сохраняются во внутреннем хранилище браузера (IndexedDB) и доступны только на вашем устройстве.</div>
+          </li>
+          <li>
+            <div class="faq-question"><i class="fas fa-chevron-right"></i> Как скачать нормативный документ?</div>
+            <div class="faq-answer">В разделе «Нормативные документы» нажмите на название документа — он откроется в новой вкладке, где его можно сохранить стандартными средствами браузера.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="docs-section">
+        <div class="docs-section-header"><i class="fas fa-phone-alt"></i><span>Контактная информация — ГОЦТТДиМ</span></div>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="contact-info"><strong>Адрес</strong><span>246015 г.Гомель, ул. Лепешинского, 9Б</span></div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-phone"></i>
+            <div class="contact-info"><strong>Телефон (приемная)</strong><span>8(0232)26-20-07</span></div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-fax"></i>
+            <div class="contact-info"><strong>Факс (метод. кабинет)</strong><span>8(0232)26-55-64</span></div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <div class="contact-info"><strong>Email</strong><span>edu@octt.by</span></div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-clock"></i>
+            <div class="contact-info"><strong>Режим работы (администрация)</strong><span>Пн–Пт: 8:30–17:15<br>Обед: 13:00–13:45<br>Сб, Вс: выходные</span></div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-user-clock"></i>
+            <div class="contact-info"><strong>Дежурный администратор</strong><span>Пн–Пт: 12:00–20:20<br>Сб, Вс: 8:30–17:30<br>Обед: 13:00–13:20</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
 
-<footer class="portal-footer">© 2026 Учебно-методический портал · Все материалы для преподавателей</footer>
+<div class="modal" id="previewModal">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
 <script>
-    (function(){
-        // ---------- ВСТРОЕННЫЕ ДАННЫЕ НАПРАВЛЕНИЙ ----------
-        const directionsData = [
-            { title: 'Робототехника', banner: 'banner-blue', description: 'Сборка и программирование роботов' },
-            { title: 'IT', banner: 'banner-green', description: 'Программирование, сайты, технологии' },
-            { title: 'Электроника', banner: 'banner-purple', description: 'Схемы, микроконтроллеры, устройства' },
-            { title: 'Естественно-математическое', banner: 'banner-orange', description: 'Математика, физика, наука' },
-            { title: 'Социально-гуманитарное', banner: 'banner-red', description: 'Языки, история, развитие мышления' },
-            { title: 'Онлайн-школа IQ UP', banner: 'banner-teal', description: 'Дистанционное обучение и курсы' },
-            { title: 'Обучающие курсы для взрослых', banner: 'banner-amber', description: 'Обучение и повышение квалификации' }
-        ];
+  (function(){
+    // ---------- Глобальные данные ----------
+    let appData = { directions: [], programs: [] };
+    let currentDirectionId = null;
+    let currentDirectionTitle = null;
+    let currentProgramId = null;
 
-        const programsByDirection = {
-            'Робототехника': [
-                { id: 'rob1', name: 'Робототехники LEGO WEDO', desc: 'Конструирование и программирование LEGO Mindstorms' },
-                { id: 'rob2', name: 'Роботехника EV3', desc: 'Продвинутое конструирование' },
-                { id: 'rob3', name: 'ARUINO 4U', desc: 'Основы Arduino' }
-            ],
-            'IT': [
-                { id: 'it1', name: 'Компьютерная грамотность', desc: 'Базовые навыки' },
-                { id: 'it2', name: 'Юный программист', desc: 'Scratch и основы' }
-            ],
-            'Электроника': [
-                { id: 'el1', name: 'Цифровая схемотехника', desc: 'Логические элементы и микросхемы' }
-            ]
+    // ---------- IndexedDB ----------
+    let dbPromise;
+    function initDB() {
+      dbPromise = idb.openDB('edu-portal-db', 2, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains('files')) {
+            const store = db.createObjectStore('files', { keyPath: 'id' });
+            store.createIndex('programId', 'programId');
+            store.createIndex('type', 'type');
+          }
+        }
+      });
+    }
+    initDB();
+
+    async function saveFile(programId, type, file) {
+      const db = await dbPromise;
+      const id = `${programId}_${type}_${Date.now()}_${file.name}`;
+      let mimeType = file.type;
+      if (!mimeType || mimeType === 'application/octet-stream') {
+        const ext = file.name.split('.').pop().toLowerCase();
+        const mimeMap = {
+          'doc':'application/msword','docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'xls':'application/vnd.ms-excel','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'ppt':'application/vnd.ms-powerpoint','pptx':'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          'pdf':'application/pdf','txt':'text/plain','jpg':'image/jpeg','jpeg':'image/jpeg','png':'image/png',
+          'gif':'image/gif','mp4':'video/mp4','webm':'video/webm','mov':'video/quicktime'
         };
+        mimeType = mimeMap[ext] || 'application/octet-stream';
+      }
+      const fileData = { id, programId, type, name: file.name, size: file.size, lastModified: file.lastModified, mimeType, blob: file, isLink: false };
+      await db.add('files', fileData);
+      return fileData;
+    }
 
-        // ---------- БАЗА ДАННЫХ INDEXEDDB ----------
-        let dbPromise;
-        function initDB() {
-            dbPromise = idb.openDB('edu-portal-db', 2, {
-                upgrade(db) {
-                    if (!db.objectStoreNames.contains('files')) {
-                        const store = db.createObjectStore('files', { keyPath: 'id' });
-                        store.createIndex('programId', 'programId');
-                        store.createIndex('type', 'type');
-                    }
-                }
-            });
-        }
-        initDB();
+    async function saveLink(programId, type, url, title) {
+      const db = await dbPromise;
+      const id = `${programId}_${type}_link_${Date.now()}`;
+      const linkData = { id, programId, type, isLink: true, url, title: title || url, name: title || url, mimeType: 'video/link', size: 0, lastModified: Date.now() };
+      await db.add('files', linkData);
+      return linkData;
+    }
 
-        async function saveFile(programId, type, file) {
-            const db = await dbPromise;
-            const id = `${programId}_${type}_${Date.now()}_${file.name}`;
-            let mimeType = file.type;
-            if (!mimeType || mimeType === 'application/octet-stream') {
-                const ext = file.name.split('.').pop().toLowerCase();
-                const mimeMap = {
-                    'doc':'application/msword','docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                    'xls':'application/vnd.ms-excel','xlsx':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                    'ppt':'application/vnd.ms-powerpoint','pptx':'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                    'pdf':'application/pdf','txt':'text/plain','jpg':'image/jpeg','jpeg':'image/jpeg','png':'image/png',
-                    'gif':'image/gif','mp4':'video/mp4','webm':'video/webm','mov':'video/quicktime'
-                };
-                mimeType = mimeMap[ext] || 'application/octet-stream';
-            }
-            const fileData = { id, programId, type, name: file.name, size: file.size, lastModified: file.lastModified, mimeType, blob: file, isLink: false };
-            await db.add('files', fileData);
-            return fileData;
-        }
+    async function getFiles(programId, type) {
+      const db = await dbPromise;
+      const all = await db.getAllFromIndex('files', 'programId', programId);
+      return all.filter(f => f.type === type);
+    }
 
-        async function saveLink(programId, type, url, title) {
-            const db = await dbPromise;
-            const id = `${programId}_${type}_link_${Date.now()}`;
-            const linkData = { id, programId, type, isLink: true, url, title: title || url, name: title || url, mimeType: 'video/link', size: 0, lastModified: Date.now() };
-            await db.add('files', linkData);
-            return linkData;
-        }
+    async function deleteFile(fileId) {
+      const db = await dbPromise;
+      await db.delete('files', fileId);
+    }
 
-        async function getFiles(programId, type) {
-            const db = await dbPromise;
-            const all = await db.getAllFromIndex('files', 'programId', programId);
-            return all.filter(f => f.type === type);
-        }
+    // ---------- Загрузка JSON ----------
+    async function loadData() {
+      try {
+        const [dirRes, progRes] = await Promise.all([
+          fetch('data/directions.json'),
+          fetch('data/programs.json')
+        ]);
+        if (!dirRes.ok || !progRes.ok) throw new Error('HTTP error');
+        appData.directions = (await dirRes.json()).directions || [];
+        appData.programs = (await progRes.json()).programs || [];
+      } catch (err) {
+        console.error('loadData failed', err);
+        alert('Ошибка загрузки содержимого портала. Проверьте наличие папки data и файлов directions.json, programs.json');
+      }
+    }
 
-        async function deleteFile(fileId) {
-            const db = await dbPromise;
-            await db.delete('files', fileId);
-        }
+    function getProgramsByDirection(directionId) {
+      return appData.programs.filter(p => p.directionId === directionId);
+    }
 
-        // ---------- DOM элементы ----------
-        const menuItems = document.querySelectorAll('.menu-item');
-        const directionGrid = document.getElementById('directionGrid');
-        const programsView = document.getElementById('programsView');
-        const programDetailView = document.getElementById('programDetailView');
-        const coursesHeader = document.getElementById('coursesHeader');
-        const docsContainer = document.getElementById('docsContainer');
-        const contestsContainer = document.getElementById('contestsContainer');
-        const supportContainer = document.getElementById('supportContainer');
-        const directionSearch = document.getElementById('directionSearch');
-        const directionNameSpan = document.getElementById('directionNameLabel');
-        const programGrid = document.getElementById('programGrid');
-        const backToDirections = document.getElementById('backToDirections');
-        const backToPrograms = document.getElementById('backToPrograms');
-        const programDetailTitle = document.getElementById('programDetailTitle');
-        const programDetailDesc = document.getElementById('programDetailDesc');
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabPanes = document.querySelectorAll('.tab-pane');
-        const lists = {
-            syllabus: document.getElementById('syllabusList'),
-            materials: document.getElementById('materialsList'),
-            presentations: document.getElementById('presentationsList'),
-            masterclasses: document.getElementById('masterclassesList'),
-            videos: document.getElementById('videosList')
-        };
-        const fileInputs = {
-            syllabus: document.getElementById('fileInputSyllabus'),
-            materials: document.getElementById('fileInputMaterials'),
-            presentations: document.getElementById('fileInputPresentations'),
-            masterclasses: document.getElementById('fileInputMasterclasses'),
-            videos: document.getElementById('fileInputVideos')
-        };
+    // ---------- DOM элементы ----------
+    const directionGrid = document.getElementById('directionGrid');
+    const programsView = document.getElementById('programsView');
+    const programDetailView = document.getElementById('programDetailView');
+    const coursesHeader = document.getElementById('coursesHeader');
+    const docsContainer = document.getElementById('docsContainer');
+    const contestsContainer = document.getElementById('contestsContainer');
+    const supportContainer = document.getElementById('supportContainer');
+    const directionSearch = document.getElementById('directionSearch');
+    const directionNameSpan = document.getElementById('directionNameLabel');
+    const programGrid = document.getElementById('programGrid');
+    const backToDirections = document.getElementById('backToDirections');
+    const backToPrograms = document.getElementById('backToPrograms');
+    const programDetailTitle = document.getElementById('programDetailTitle');
+    const programDetailDesc = document.getElementById('programDetailDesc');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const lists = {
+      syllabus: document.getElementById('syllabusList'),
+      materials: document.getElementById('materialsList'),
+      presentations: document.getElementById('presentationsList'),
+      masterclasses: document.getElementById('masterclassesList'),
+      videos: document.getElementById('videosList')
+    };
+    const fileInputs = {
+      syllabus: document.getElementById('fileInputSyllabus'),
+      materials: document.getElementById('fileInputMaterials'),
+      presentations: document.getElementById('fileInputPresentations'),
+      masterclasses: document.getElementById('fileInputMasterclasses'),
+      videos: document.getElementById('fileInputVideos')
+    };
 
-        let currentDirection = null;
-        let currentProgramId = null;
+    // ---------- Рендер ----------
+    function renderDirections() {
+      directionGrid.innerHTML = '';
+      appData.directions.forEach(dir => {
+        const card = document.createElement('div');
+        card.className = 'direction-card';
+        card.setAttribute('data-id', dir.id);
+        card.innerHTML = `<div class="card-banner ${dir.bannerClass}"></div><div class="card-content"><div class="card-title">${escapeHtml(dir.title)}</div><div class="card-description">${escapeHtml(dir.description)}</div></div>`;
+        card.addEventListener('click', () => openDirection(dir.id, dir.title));
+        directionGrid.appendChild(card);
+      });
+    }
 
-        // Модальное окно
-        const modal = document.getElementById('previewModal');
-        const modalBody = document.getElementById('modalBody');
-        const modalContent = document.querySelector('.modal-content');
-        document.getElementById('modalClose').addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-        function closeModal() {
-            modal.classList.remove('active');
-            modalContent.classList.remove('video-mode');
-            modalBody.innerHTML = '';
-        }
-
-        // ---------- РЕНДЕРИНГ ----------
-        function renderDirections() {
-            directionGrid.innerHTML = '';
-            directionsData.forEach(dir => {
-                const card = document.createElement('div');
-                card.className = 'direction-card';
-                card.setAttribute('data-title', dir.title);
-                card.innerHTML = `<div class="card-banner ${dir.banner}"></div><div class="card-content"><div class="card-title">${dir.title}</div><div class="card-description">${dir.description}</div></div>`;
-                card.addEventListener('click', () => openDirection(dir.title));
-                directionGrid.appendChild(card);
-            });
-        }
-
-        function openDirection(directionTitle) {
-            currentDirection = directionTitle;
-            const programs = programsByDirection[directionTitle] || [];
-            directionNameSpan.textContent = directionTitle;
-            programGrid.innerHTML = '';
-            if (programs.length === 0) {
-                programGrid.innerHTML = '<div style="padding:20px;color:#5f6368;">Нет программ в этом направлении</div>';
-            } else {
-                programs.forEach(prog => {
-                    const card = document.createElement('div');
-                    card.className = 'program-card';
-                    card.innerHTML = `<div class="card-banner banner-lightblue"></div><div class="card-content"><div class="card-title">${escapeHtml(prog.name)}</div><div class="card-description">${escapeHtml(prog.desc)}</div></div>`;
-                    card.addEventListener('click', () => openProgram(prog.id, prog.name, prog.desc));
-                    programGrid.appendChild(card);
-                });
-            }
-            directionGrid.style.display = 'none';
-            programsView.style.display = 'block';
-            programDetailView.style.display = 'none';
-            coursesHeader.style.display = 'none';
-        }
-
-        async function openProgram(programId, name, description) {
-            currentProgramId = programId;
-            programDetailTitle.textContent = name;
-            programDetailDesc.textContent = description;
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanes.forEach(p => p.classList.remove('active'));
-            document.querySelector('[data-tab="syllabus"]').classList.add('active');
-            document.getElementById('tab-syllabus').classList.add('active');
-            await loadFilesForAllTabs(programId);
-            programsView.style.display = 'none';
-            programDetailView.style.display = 'block';
-        }
-
-        async function loadFilesForAllTabs(programId) {
-            for (let type of ['syllabus','materials','presentations','masterclasses','videos']) {
-                const files = await getFiles(programId, type);
-                renderFileList(lists[type], files, type, programId);
-            }
-        }
-
-        function renderFileList(container, items, type, programId) {
-            container.innerHTML = '';
-            if (!items.length) {
-                container.innerHTML = '<li style="justify-content:center;color:#5f6368;">Нет материалов</li>';
-                return;
-            }
-            items.sort((a,b) => a.name.localeCompare(b.name));
-            items.forEach(item => {
-                const li = document.createElement('li');
-                const icon = item.isLink ? 'fas fa-link' : getFileIcon(item.mimeType);
-                const sizeStr = item.isLink ? 'Ссылка' : formatBytes(item.size);
-                const displayName = item.title || item.name;
-                li.innerHTML = `<i class="${icon}"></i><div class="file-info"><span class="file-name">${escapeHtml(displayName)}</span><span class="file-meta"><span>${sizeStr}</span><span>${new Date(item.lastModified).toLocaleDateString()}</span></span></div><div class="file-actions"><i class="fas fa-eye" title="Открыть" data-action="open" data-id="${item.id}"></i>${!item.isLink ? '<i class="fas fa-download" title="Скачать" data-action="download" data-id="'+item.id+'"></i>' : ''}<i class="fas fa-trash-alt" title="Удалить" data-action="delete" data-id="${item.id}"></i></div>`;
-                li.querySelector('[data-action="open"]').addEventListener('click', (e)=> { e.stopPropagation(); openItem(item); });
-                const dwBtn = li.querySelector('[data-action="download"]');
-                if (dwBtn) dwBtn.addEventListener('click', (e)=> { e.stopPropagation(); downloadFile(item); });
-                li.querySelector('[data-action="delete"]').addEventListener('click', async (e)=> {
-                    e.stopPropagation();
-                    if (confirm(`Удалить "${displayName}"?`)) { await deleteFile(item.id); await loadFilesForAllTabs(programId); }
-                });
-                container.appendChild(li);
-            });
-        }
-
-        // ---------- УЛУЧШЕННОЕ МОДАЛЬНОЕ ОКНО ----------
-        function openItem(item) {
-            closeModal();
-            modalContent.classList.remove('video-mode');
-            if (item.isLink) {
-                const url = item.url;
-                const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/?#]+)/);
-                if (ytMatch) {
-                    const videoId = ytMatch[1];
-                    const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}`;
-                    modalContent.classList.add('video-mode');
-                    modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
-                } else if (url.includes('vimeo.com')) {
-                    const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
-                    let embedUrl = vimeoMatch ? `https://player.vimeo.com/video/${vimeoMatch[1]}` : url;
-                    modalContent.classList.add('video-mode');
-                    modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe></div>`;
-                } else if (/\.(mp4|webm|mov|ogg)$/i.test(url)) {
-                    modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><video controls style="max-width:100%; max-height:70vh;"><source src="${url}"></video>`;
-                } else {
-                    modalContent.classList.add('video-mode');
-                    modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${url}" frameborder="0" allowfullscreen></iframe></div>`;
-                }
-                modal.classList.add('active');
-                return;
-            }
-            const blob = item.blob;
-            if (!blob) { modalBody.innerHTML = `<p>Ошибка: файл недоступен.</p>`; modal.classList.add('active'); return; }
-            const blobUrl = URL.createObjectURL(blob);
-            const mime = item.mimeType;
-            if (mime.startsWith('image/')) {
-                modalBody.innerHTML = `<img src="${blobUrl}" style="max-width:100%; max-height:80vh; display:block; margin:0 auto;" alt="${item.name}">`;
-            } else if (mime === 'application/pdf') {
-                modalBody.innerHTML = `<iframe src="${blobUrl}" width="100%" height="80vh" frameborder="0"></iframe>`;
-            } else if (mime.startsWith('text/')) {
-                fetch(blobUrl).then(r => r.text()).then(text => { modalBody.innerHTML = `<pre style="white-space:pre-wrap; max-height:80vh; overflow:auto;">${escapeHtml(text)}</pre>`; });
-            } else if (mime.startsWith('video/') || mime.startsWith('audio/')) {
-                modalBody.innerHTML = `<video controls style="max-width:100%; max-height:80vh;"><source src="${blobUrl}" type="${mime}"></video>`;
-            } else if (['application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(mime)) {
-                modalBody.innerHTML = `<h3>${escapeHtml(item.name)}</h3><p>📄 Этот файл будет открыт в новой вкладке.</p><button id="openOfficeBtn">Открыть</button> <a href="${blobUrl}" download="${item.name}">Скачать</a>`;
-                document.getElementById('openOfficeBtn').addEventListener('click', () => { window.open(blobUrl, '_blank'); closeModal(); });
-            } else {
-                modalBody.innerHTML = `<p>Предпросмотр недоступен. <a href="${blobUrl}" download="${item.name}">Скачать</a></p>`;
-            }
-            modal.classList.add('active');
-            modal.addEventListener('click', function cleanup(e) { if (e.target === modal) { URL.revokeObjectURL(blobUrl); modal.removeEventListener('click', cleanup); } });
-            document.getElementById('modalClose').addEventListener('click', function cleanup() { URL.revokeObjectURL(blobUrl); }, { once: true });
-        }
-
-        function downloadFile(file) {
-            if (!file.blob) return;
-            const url = URL.createObjectURL(file.blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        // ---------- УТИЛИТЫ ----------
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        function getFileIcon(mime) {
-            if (mime.includes('pdf')) return 'far fa-file-pdf';
-            if (mime.includes('word')) return 'far fa-file-word';
-            if (mime.includes('excel')) return 'far fa-file-excel';
-            if (mime.includes('powerpoint')) return 'far fa-file-powerpoint';
-            if (mime.includes('image')) return 'far fa-file-image';
-            if (mime.includes('video')) return 'far fa-file-video';
-            if (mime.includes('audio')) return 'far fa-file-audio';
-            return 'far fa-file';
-        }
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024, sizes = ['Bytes','KB','MB','GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // ---------- ЗАГРУЗКА ФАЙЛОВ ----------
-        async function handleFileUpload(type, files) {
-            if (!currentProgramId) return;
-            for (let file of files) await saveFile(currentProgramId, type, file);
-            await loadFilesForAllTabs(currentProgramId);
-        }
-        async function handleAddLink(type) {
-            if (!currentProgramId) return;
-            const url = prompt('Введите ссылку:');
-            if (!url) return;
-            const title = prompt('Название (необязательно):', 'Видео');
-            await saveLink(currentProgramId, type, url, title || 'Видео');
-            await loadFilesForAllTabs(currentProgramId);
-        }
-
-        document.querySelectorAll('.add-file-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-target');
-                const input = fileInputs[target];
-                if (input) input.click();
-            });
+    function openDirection(directionId, directionTitle) {
+      currentDirectionId = directionId;
+      currentDirectionTitle = directionTitle;
+      const programs = getProgramsByDirection(directionId);
+      directionNameSpan.textContent = directionTitle;
+      programGrid.innerHTML = '';
+      if (programs.length === 0) {
+        programGrid.innerHTML = '<div style="padding:20px;color:#5f6368;">Нет программ в этом направлении</div>';
+      } else {
+        programs.forEach(prog => {
+          const card = document.createElement('div');
+          card.className = 'program-card';
+          card.innerHTML = `<div class="card-banner banner-lightblue"></div><div class="card-content"><div class="card-title">${escapeHtml(prog.name)}</div><div class="card-description">${escapeHtml(prog.description)}</div></div>`;
+          card.addEventListener('click', () => openProgram(prog.id, prog.name, prog.description));
+          programGrid.appendChild(card);
         });
-        for (let [type, input] of Object.entries(fileInputs)) {
-            input.addEventListener('change', (e) => {
-                if (e.target.files.length) { handleFileUpload(type, e.target.files); input.value = ''; }
-            });
-        }
-        document.querySelectorAll('.add-link-btn').forEach(btn => {
-            btn.addEventListener('click', () => handleAddLink(btn.getAttribute('data-target')));
+      }
+      directionGrid.style.display = 'none';
+      programsView.style.display = 'block';
+      programDetailView.style.display = 'none';
+      coursesHeader.style.display = 'none';
+    }
+
+    async function openProgram(programId, name, description) {
+      currentProgramId = programId;
+      programDetailTitle.textContent = name;
+      programDetailDesc.textContent = description;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      document.querySelector('[data-tab="syllabus"]').classList.add('active');
+      document.getElementById('tab-syllabus').classList.add('active');
+      await loadFilesForAllTabs(programId);
+      programsView.style.display = 'none';
+      programDetailView.style.display = 'block';
+    }
+
+    async function loadFilesForAllTabs(programId) {
+      for (let type of ['syllabus','materials','presentations','masterclasses','videos']) {
+        const files = await getFiles(programId, type);
+        renderFileList(lists[type], files, type, programId);
+      }
+    }
+
+    function renderFileList(container, items, type, programId) {
+      container.innerHTML = '';
+      if (!items.length) {
+        container.innerHTML = '<li style="justify-content:center;color:#5f6368;">Нет материалов</li>';
+        return;
+      }
+      items.sort((a,b) => a.name.localeCompare(b.name));
+      items.forEach(item => {
+        const li = document.createElement('li');
+        const icon = item.isLink ? 'fas fa-link' : getFileIcon(item.mimeType);
+        const sizeStr = item.isLink ? 'Ссылка' : formatBytes(item.size);
+        const displayName = item.title || item.name;
+        li.innerHTML = `<i class="${icon}"></i><div class="file-info"><span class="file-name">${escapeHtml(displayName)}</span><span class="file-meta"><span>${sizeStr}</span><span>${new Date(item.lastModified).toLocaleDateString()}</span></span></div><div class="file-actions"><i class="fas fa-eye" title="Открыть" data-action="open" data-id="${item.id}"></i>${!item.isLink ? '<i class="fas fa-download" title="Скачать" data-action="download" data-id="'+item.id+'"></i>' : ''}<i class="fas fa-trash-alt" title="Удалить" data-action="delete" data-id="${item.id}"></i></div>`;
+        li.querySelector('[data-action="open"]').addEventListener('click', (e)=> { e.stopPropagation(); openItem(item); });
+        const dwBtn = li.querySelector('[data-action="download"]');
+        if (dwBtn) dwBtn.addEventListener('click', (e)=> { e.stopPropagation(); downloadFile(item); });
+        li.querySelector('[data-action="delete"]').addEventListener('click', async (e)=> {
+          e.stopPropagation();
+          if (confirm(`Удалить "${displayName}"?`)) { await deleteFile(item.id); await loadFilesForAllTabs(programId); }
         });
+        container.appendChild(li);
+      });
+    }
 
-        // ---------- НАВИГАЦИЯ ----------
-        function hideAllViews() {
-            directionGrid.style.display = 'none';
-            programsView.style.display = 'none';
-            programDetailView.style.display = 'none';
-            coursesHeader.style.display = 'none';
-            docsContainer.style.display = 'none';
-            contestsContainer.style.display = 'none';
-            supportContainer.style.display = 'none';
+    // ---------- Модальное окно ----------
+    const modal = document.getElementById('previewModal');
+    const modalBody = document.getElementById('modalBody');
+    const modalContent = document.querySelector('.modal-content');
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalContent.classList.remove('video-mode');
+      modalBody.innerHTML = '';
+    }
+
+    function openItem(item) {
+      closeModal();
+      modalContent.classList.remove('video-mode');
+      if (item.isLink) {
+        const url = item.url;
+        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/?#]+)/);
+        if (ytMatch) {
+          const videoId = ytMatch[1];
+          const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}`;
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
+        } else if (url.includes('vimeo.com')) {
+          const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+          let embedUrl = vimeoMatch ? `https://player.vimeo.com/video/${vimeoMatch[1]}` : url;
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe></div>`;
+        } else if (/\.(mp4|webm|mov|ogg)$/i.test(url)) {
+          modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><video controls style="max-width:100%; max-height:70vh;"><source src="${url}"></video>`;
+        } else {
+          modalContent.classList.add('video-mode');
+          modalBody.innerHTML = `<h3 style="margin-bottom:16px">${escapeHtml(item.title || item.name)}</h3><div class="video-container"><iframe src="${url}" frameborder="0" allowfullscreen></iframe></div>`;
         }
+        modal.classList.add('active');
+        return;
+      }
+      const blob = item.blob;
+      if (!blob) { modalBody.innerHTML = `<p>Ошибка: файл недоступен.</p>`; modal.classList.add('active'); return; }
+      const blobUrl = URL.createObjectURL(blob);
+      const mime = item.mimeType;
+      if (mime.startsWith('image/')) {
+        modalBody.innerHTML = `<img src="${blobUrl}" style="max-width:100%; max-height:80vh; display:block; margin:0 auto;" alt="${item.name}">`;
+      } else if (mime === 'application/pdf') {
+        modalBody.innerHTML = `<iframe src="${blobUrl}" width="100%" height="80vh" frameborder="0"></iframe>`;
+      } else if (mime.startsWith('text/')) {
+        fetch(blobUrl).then(r => r.text()).then(text => { modalBody.innerHTML = `<pre style="white-space:pre-wrap; max-height:80vh; overflow:auto;">${escapeHtml(text)}</pre>`; });
+      } else if (mime.startsWith('video/') || mime.startsWith('audio/')) {
+        modalBody.innerHTML = `<video controls style="max-width:100%; max-height:80vh;"><source src="${blobUrl}" type="${mime}"></video>`;
+      } else if (['application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(mime)) {
+        modalBody.innerHTML = `<h3>${escapeHtml(item.name)}</h3><p>📄 Этот файл будет открыт в новой вкладке.</p><button id="openOfficeBtn">Открыть</button> <a href="${blobUrl}" download="${item.name}">Скачать</a>`;
+        document.getElementById('openOfficeBtn').addEventListener('click', () => { window.open(blobUrl, '_blank'); closeModal(); });
+      } else {
+        modalBody.innerHTML = `<p>Предпросмотр недоступен. <a href="${blobUrl}" download="${item.name}">Скачать</a></p>`;
+      }
+      modal.classList.add('active');
+      modal.addEventListener('click', function cleanup(e) { if (e.target === modal) { URL.revokeObjectURL(blobUrl); modal.removeEventListener('click', cleanup); } });
+      document.getElementById('modalClose').addEventListener('click', function cleanup() { URL.revokeObjectURL(blobUrl); }, { once: true });
+    }
 
-        function switchView(viewId) {
-            menuItems.forEach(item => item.classList.toggle('active', item.getAttribute('data-view') === viewId));
-            hideAllViews();
-            if (viewId === 'courses') {
-                directionGrid.style.display = 'flex';
-                coursesHeader.style.display = 'block';
-                currentDirection = null;
-            } else if (viewId === 'docs') {
-                docsContainer.style.display = 'block';
-            } else if (viewId === 'contests') {
-                contestsContainer.style.display = 'block';
-            } else if (viewId === 'support') {
-                supportContainer.style.display = 'block';
-            }
-        }
+    function downloadFile(file) {
+      if (!file.blob) return;
+      const url = URL.createObjectURL(file.blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
 
-        // FAQ аккордеон
-        supportContainer.addEventListener('click', (e) => {
-            const question = e.target.closest('.faq-question');
-            if (!question) return;
-            const li = question.closest('li');
-            li.classList.toggle('open');
-        });
+    // ---------- Утилиты ----------
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    function getFileIcon(mime) {
+      if (mime.includes('pdf')) return 'far fa-file-pdf';
+      if (mime.includes('word')) return 'far fa-file-word';
+      if (mime.includes('excel')) return 'far fa-file-excel';
+      if (mime.includes('powerpoint')) return 'far fa-file-powerpoint';
+      if (mime.includes('image')) return 'far fa-file-image';
+      if (mime.includes('video')) return 'far fa-file-video';
+      if (mime.includes('audio')) return 'far fa-file-audio';
+      return 'far fa-file';
+    }
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024, sizes = ['Bytes','KB','MB','GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
 
-        // Табы
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabPanes.forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(`tab-${tabId}`).classList.add('active');
-            });
-        });
+    // ---------- Обработчики загрузки ----------
+    async function handleFileUpload(type, files) {
+      if (!currentProgramId) return;
+      for (let file of files) await saveFile(currentProgramId, type, file);
+      await loadFilesForAllTabs(currentProgramId);
+    }
+    async function handleAddLink(type) {
+      if (!currentProgramId) return;
+      const url = prompt('Введите ссылку:');
+      if (!url) return;
+      const title = prompt('Название (необязательно):', 'Видео');
+      await saveLink(currentProgramId, type, url, title || 'Видео');
+      await loadFilesForAllTabs(currentProgramId);
+    }
 
-        // Инициализация
+    document.querySelectorAll('.add-file-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        const input = fileInputs[target];
+        if (input) input.click();
+      });
+    });
+    for (let [type, input] of Object.entries(fileInputs)) {
+      input.addEventListener('change', (e) => {
+        if (e.target.files.length) { handleFileUpload(type, e.target.files); input.value = ''; }
+      });
+    }
+    document.querySelectorAll('.add-link-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleAddLink(btn.getAttribute('data-target')));
+    });
+
+    // ---------- Навигация ----------
+    function hideAllViews() {
+      directionGrid.style.display = 'none';
+      programsView.style.display = 'none';
+      programDetailView.style.display = 'none';
+      coursesHeader.style.display = 'none';
+      docsContainer.style.display = 'none';
+      contestsContainer.style.display = 'none';
+      supportContainer.style.display = 'none';
+    }
+
+    function switchView(viewId) {
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => item.classList.toggle('active', item.getAttribute('data-view') === viewId));
+      hideAllViews();
+      if (viewId === 'courses') {
+        directionGrid.style.display = 'flex';
+        coursesHeader.style.display = 'block';
+        currentDirectionId = null;
+      } else if (viewId === 'docs') {
+        docsContainer.style.display = 'block';
+      } else if (viewId === 'contests') {
+        contestsContainer.style.display = 'block';
+      } else if (viewId === 'support') {
+        supportContainer.style.display = 'block';
+      }
+    }
+
+    // FAQ аккордеон
+    supportContainer.addEventListener('click', (e) => {
+      const question = e.target.closest('.faq-question');
+      if (!question) return;
+      const li = question.closest('li');
+      li.classList.toggle('open');
+    });
+
+    // Табы
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+      });
+    });
+
+    // Инициализация
+    (async function init() {
+      await loadData();
+      if (appData.directions.length === 0) {
+        directionGrid.innerHTML = '<div style="padding:20px;color:#c5221f;">Не удалось загрузить направления. Проверьте папку data/ и файлы directions.json, programs.json</div>';
+      } else {
         renderDirections();
-        menuItems.forEach(item => item.addEventListener('click', () => switchView(item.getAttribute('data-view'))));
-        directionSearch.addEventListener('input', () => {
-            const q = directionSearch.value.toLowerCase().trim();
-            document.querySelectorAll('.direction-card').forEach(card => {
-                const t = (card.querySelector('.card-title')?.innerText || '').toLowerCase();
-                card.style.display = (!q || t.includes(q)) ? '' : 'none';
-            });
+      }
+      document.querySelectorAll('.menu-item').forEach(item =>
+        item.addEventListener('click', () => switchView(item.getAttribute('data-view')))
+      );
+      directionSearch.addEventListener('input', () => {
+        const q = directionSearch.value.toLowerCase().trim();
+        document.querySelectorAll('.direction-card').forEach(card => {
+          const t = (card.querySelector('.card-title')?.innerText || '').toLowerCase();
+          card.style.display = (!q || t.includes(q)) ? '' : 'none';
         });
-        backToDirections.addEventListener('click', () => {
-            switchView('courses');
-            directionGrid.style.display = 'flex';
-            coursesHeader.style.display = 'block';
-        });
-        backToPrograms.addEventListener('click', () => {
-            if (currentDirection) {
-                openDirection(currentDirection);
-            } else {
-                switchView('courses');
-            }
-        });
-        document.querySelectorAll('.doc-list li').forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const docName = item.querySelector('.doc-name')?.innerText || 'документ';
-                alert(`📄 Открыть документ:\n«${docName}»\n(демонстрационный режим)`);
-            });
-        });
+      });
+      backToDirections.addEventListener('click', () => {
         switchView('courses');
+        directionGrid.style.display = 'flex';
+        coursesHeader.style.display = 'block';
+      });
+      backToPrograms.addEventListener('click', () => {
+        if (currentDirectionId) openDirection(currentDirectionId, currentDirectionTitle);
+        else switchView('courses');
+      });
+      switchView('courses');
     })();
+  })();
 </script>
 </body>
 </html>
