@@ -1,31 +1,31 @@
 {
-    "directions": [
+  "directions": [
     {
-        "id": "robotics",
-        "title": "Робототехника",
-        "bannerClass": "banner-blue",
-        "description": "Сборка и программирование роботов"
+      "id": 1,
+      "title": "Робототехника",
+      "description": "Конструирование и программирование роботов",
+      "bannerClass": "banner-blue"
     },
     {
-        "id": "it",
+        "id": 2,
         "title": "IT",
         "bannerClass": "banner-green",
         "description": "Программирование, сайты, технологии"
     },
     {
-        "id": "electronics",
+        "id": 3,
         "title": "Электроника",
         "bannerClass": "banner-purple",
         "description": "Схемы, микроконтроллеры, устройства"
     },
     {
-        "id": "mat",
+        "id": 4,
         "title": "Естественно-математическое",
         "bannerClass": "banner-orange",
         "description": "Математика, физика..."
     },
     {
-        "id": "sots",
+        "id": 5,
         "title": "Социально-гуманитарное",
         "bannerClass": "banner-red",
         "description": "Языки"
