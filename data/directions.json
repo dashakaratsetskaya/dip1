@@ -29,6 +29,18 @@
         "title": "Социально-гуманитарное",
         "bannerClass": "banner-red",
         "description": "Языки"
+    },
+    {
+        "id": 6,
+        "title": "Онлайн-школа IQ UP",
+        "bannerClass": "banner-teal",
+        "description": "Дистанционное обучение и курсы"
+    },
+    {
+      "id": 7,
+      "title": "Обучающие курсы для взрослых",
+      "bannerClass": "banner-amber",
+      "description": "Обучение и повышение квалификации"
     }
     ]
 }
